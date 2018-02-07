@@ -9,6 +9,20 @@
 .navbar {
     background-color: lightblue;
 }
+.new-card {
+  background-color: pink;
+  position:relative;
+  margin: 15px auto;
+  border: 1px solid grey;
+  border-radius: 0.5em;
+}
 
+.new-card-board-info {
+display: inline-block;
+
+}
+#new-board-name {
+display: none;
+}
 
 

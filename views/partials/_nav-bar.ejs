@@ -14,3 +14,22 @@
     </div>
   </div>
 </nav>
+      <section class="new-card col-md-5" >
+        <h2 class="h2">Create Card</h2>
+        <!-- We are saving to a specific board -->
+         <form id="create-card" class="create-card" action="/cards" method="post" >
+            <textarea id="card-title-text" class="text-area" name="text" placeholder=  "EX:StackOverFlow: SQL Joins"></textarea>
+              <img class="website-preview" src="URLtoWebsite"  >
+               <h3 class="h3">#TAGS</h3>
+             <textarea id="card-tags-text" class="text-area" name="text" placeholder=  "Add category tags ex: #SQLjoins #LeftJoin"></textarea>
+                <section class="new-card-board-info">
+              <h3 class="h3">Add to board</h3>
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">create new board</button>
+               <!--id="new-board-header"  should be hidden unless addboard button clicked -->
+             <input id="new-board-name" class="form-control mr-sm-2" type="text" placeholder="New Board Name">
+              <!--"save shows up in button when you hover on it could be same color as background and then changes to contrast when hover-->
+        <button id="existing-board"class="btn btn-outline-success my-2 my-sm-0" type="submit">Existing Board "SAVE"</button>
+         </section>
+        </form>
+
+      </section>

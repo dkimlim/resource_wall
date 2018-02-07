@@ -1,0 +1,9 @@
+.friends-side-bar {
+  position: relative;
+  z-index: 2;
+  text-align: left;
+  display: none;
+  ul {
+    float: right;   
+  }
+}
