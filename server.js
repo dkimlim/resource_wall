@@ -2,17 +2,17 @@
 
 require('dotenv').config();
 
-const PORT        = process.env.PORT || 8080;
-const ENV         = process.env.ENV || "development";
-const express     = require("express");
-const bodyParser  = require("body-parser");
-const sass        = require("node-sass-middleware");
-const app         = express();
+const PORT = process.env.PORT || 8080;
+const ENV = process.env.ENV || "development";
+const express = require("express");
+const bodyParser = require("body-parser");
+const sass = require("node-sass-middleware");
+const app = express();
 
-const knexConfig  = require("./knexfile");
-const knex        = require("knex")(knexConfig[ENV]);
-const morgan      = require('morgan');
-const knexLogger  = require('knex-logger');
+const knexConfig = require("./knexfile");
+const knex = require("knex")(knexConfig[ENV]);
+const morgan = require('morgan');
+const knexLogger = require('knex-logger');
 const DataHelpers = require('./lib/data-helpers.js')(knex);
 
 // Seperated Routes for each Resource
@@ -27,7 +27,9 @@ app.use(morgan('dev'));
 app.use(knexLogger(knex));
 
 app.set("view engine", "ejs");
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 app.use("/styles", sass({
   src: __dirname + "/styles",
   dest: __dirname + "/public/styles",
@@ -45,10 +47,14 @@ app.get("/", (req, res) => {
 });
 
 app.get("/login", (req, res) => {
-  const userExists = DataHelpers.checkUser({email:'alice@alice.com', password:'alicea'}, (err, userExists) => {
-    if(err) console.error("problems");
-    console.log(userExists);
-    res.json({val: userExists});
+  DataHelpers.checkUser({email: 'alice@alice.com',password: 'alice'}, (err, userExists) => {
+    if (err) {
+      console.error("problems");
+      res.status(403).send();
+    } else {
+      console.log('result',userExists);
+      res.send(userExists);
+    }
   })
 });
 
