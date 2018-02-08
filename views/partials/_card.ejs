@@ -5,36 +5,33 @@
      <link rel="stylesheet" href="/node_modules/css-star-rating/dist/css/star-rating.css">
   </head>
 
-<div class="card">
-  <header>
-    <h1><a  class="card-title" href="https://www.google.com">Card Title</a></h1>
-  </header>
 
-  <div class ="card-image">
-    <img class="website-preview" src="URLtoWebsite"  >
+<div class="card" style="width: 18rem;">
+    <h5><a  class="card-title" href="https://www.google.com">Card Title</a></h5>
+  <img class="card-img-top" src="..." alt="Card image cap">
+  <div class="card-body">
+
+    <p class="card-tags">#javascript #SQL #Left Join</p>
   </div>
-
-  <summary>
-    <p class="card-tags"> #javascript #SQL #Left Join</p>
-     <span class="user-name"> Saved by <b> Beyonce </b></span>
+   <span class="user-name"> Saved by <b> Beyonce </b></span>
       <actions class="card-reaction">
-        <i class="fa fa-heart" aria-hidden="true"></i>
+        <i class="fa fa-heart" aria-hidden="true" type="submit"> </i>
         <span class="likes-value"> 1 </span>
-        <button id="comment-box-open" class="btn btn-outline-success my-2 my-sm-0" type="button">Add comment</button>
+     </actions>
+
+  <div class="comments">
+    <button id="comment-box-open" class="btn btn-outline-success my-2 my-sm-0" type="button">Add comment</button>
         <form id="comment-box" class="commentbox" action="/comments" method="post" >
           <textarea id="text-area" class="text-area" name="text" placeholder=  "What do you think of this resource?"></textarea>
           <input id="comment-submit"  class="comment-submit" type="submit" value="Reply">
         </form>
-<!--star rating here ...  tried plugin npm install css-star-rating need to tweek so deleted the related code for now-->
-      </actions>
-  </summary>
-
-  <section class="comments">
-    <button id="comments-display" class="btn btn-outline-success my-2 my-sm-0" type="button">Display Comments</button>
+     <button id="comments-display" class="btn btn-outline-success my-2 my-sm-0" type="button">Display Comments</button>
      <section class="comment-container">
     <div class="indv-comment">
      <span class="commenter-name"><b> JAYZ </b>says...</span>
      <p class="card-comment"> this is a great resource</p>
    </div>
-  </section>
+  </div>
 </div>
+
+
