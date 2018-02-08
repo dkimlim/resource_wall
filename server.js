@@ -53,7 +53,12 @@ app.get("/", (req, res) => {
 });
 
 app.get("/login", (req, res) => {
-  DataHelpers.checkUser({email: 'bob@bob.com',password: 'bob'}, (err, userInfo) => {
+  const isLoggedIn = DataHelpers.loggedIN(req.session)
+  res.status(200).send(isLoggedIn)
+    });
+
+app.post("/login", (req, res) => {
+  DataHelpers.checkUser({email: req.body.email, password: req.body.password}, (err, userInfo) => {
     if (err) {
       console.error("problems");
       res.status(403).send();
@@ -64,6 +69,7 @@ app.get("/login", (req, res) => {
     }
   })
 });
+
 
 app.get("/logout", (req, res) => {
   req.session = null;
