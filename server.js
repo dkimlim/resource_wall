@@ -76,13 +76,14 @@ app.post("/cards", (req, res) => {
     DataHelpers.addNewCard(cardInfo);
     //We will have to change this to get userSpecific cards
     const allCards = DataHelpers.getAllCards(req.session);
-    res.send(allCards);
-})
+    res.send(200, allCards);
+});
 
 app.post("/boards", (req, res) => {
   let boardInfo = {name: req.body["boardname"], userID: req.session.userID}
-  DataHelpers.addNewBoard(boardInfo)
-})
+  const boardAdded = DataHelpers.addNewBoard(boardInfo)
+  res.send(200);
+});
 
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
