@@ -6,3 +6,13 @@ $(() => {
   });;
 });
 
+$( document ).ready(function() {
+
+$("#reveal-new-card").click(function(){
+     $("#create-card").slideToggle("slow");
+    });
+
+$("#create-new-board").click(function(){
+    $("#new-board").slideToggle("slow");
+     });
+});

@@ -10,11 +10,11 @@
       <button class="btn btn-sm align-middle btn-outline-secondary reg-button" type="button">Register</button>
       <button class="btn btn-sm align-middle btn-outline-secondary my-board-button" type="button">MyBoards</button>
       <button class="btn btn-sm align-middle btn-outline-secondary following-button" type="button">Following</button>
-      <button class="btn btn-sm align-middle btn-outline-secondary add-res-button" type="button">AddRes</button>
+      <button id="reveal-new-card" class="btn btn-sm align-middle btn-outline-secondary add-res-button" type="button">CreateCard</button>
     </div>
   </div>
 </nav>
-      <section class="new-card col-md-5" >
+      <section id="create-card" class="new-card col-md-5" >
         <h2 class="h2">Create Card</h2>
         <!-- We are saving to a specific board -->
          <form id="create-card" class="create-card" action="/cards" method="post" >
@@ -24,9 +24,9 @@
              <textarea id="card-tags-text" class="text-area" name="text" placeholder=  "Add category tags ex: #SQLjoins #LeftJoin"></textarea>
                 <section class="new-card-board-info">
               <h3 class="h3">Add to board</h3>
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">create new board</button>
+            <button id="create-new-board" class="btn btn-outline-success my-2 my-sm-0" type="button">create new board</button>
                <!--id="new-board-header"  should be hidden unless addboard button clicked -->
-             <input id="new-board-name" class="form-control mr-sm-2" type="text" placeholder="New Board Name">
+             <input id="new-board" class="form-control mr-sm-2" type="text" placeholder="New Board Name">
               <!--"save shows up in button when you hover on it could be same color as background and then changes to contrast when hover-->
         <button id="existing-board"class="btn btn-outline-success my-2 my-sm-0" type="submit">Existing Board "SAVE"</button>
          </section>
