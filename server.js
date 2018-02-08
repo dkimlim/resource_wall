@@ -70,6 +70,26 @@ app.get("/logout", (req, res) => {
   res.send("logged out");
 })
 
+app.post("/register", (req, res, err) => {
+  const userData = {username: req.body.username, email: req.body.email, password: req.body.password};
+
+  DataHelpers.isUserAlreadyExist(userData, (isExist) => {
+    if (isExist) {
+      //If this exists, then user information is not unique in db.
+      console.error("problems");
+      res.status(401).send();
+    } else {
+      DataHelpers.insertNewUser(userData);
+      res.send();
+    }
+  }, 
+    error => {
+      res.status(500).send(error.error);
+    }
+  )
+});
+
+
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
 });
