@@ -70,6 +70,20 @@ app.get("/logout", (req, res) => {
   res.send("logged out");
 })
 
+//This  adds a new card to the card database and then returns all the cards present
+app.post("/cards", (req, res) => {
+    let cardInfo = {url: req.body["card-url"], tags: req.body.tags, boardID: req.body["board-id"]};
+    DataHelpers.addNewCard(cardInfo);
+    //We will have to change this to get userSpecific cards
+    const allCards = DataHelpers.getAllCards(req.session);
+    res.send(allCards);
+})
+
+app.post("/boards", (req, res) => {
+  let boardInfo = {name: req.body["boardname"], userID: req.session.userID}
+  DataHelpers.addNewBoard(boardInfo)
+})
+
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
 });
