@@ -14,6 +14,7 @@ const knex = require("knex")(knexConfig[ENV]);
 const morgan = require('morgan');
 const knexLogger = require('knex-logger');
 const DataHelpers = require('./lib/data-helpers.js')(knex);
+const cookieSession = require('cookie-session');
 
 // Seperated Routes for each Resource
 const usersRoutes = require("./routes/users");
@@ -25,6 +26,11 @@ app.use(morgan('dev'));
 
 // Log knex SQL queries to STDOUT as well
 app.use(knexLogger(knex));
+
+app.use(cookieSession ({
+  name: "session",
+  keys: ["key1", "key2", "key3"]
+}));
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({
@@ -47,13 +53,14 @@ app.get("/", (req, res) => {
 });
 
 app.get("/login", (req, res) => {
-  DataHelpers.checkUser({email: 'alice@alice.com',password: 'alice'}, (err, userExists) => {
+  DataHelpers.checkUser({email: 'bob@bob.com',password: 'bob'}, (err, userInfo) => {
     if (err) {
       console.error("problems");
       res.status(403).send();
     } else {
-      console.log('result',userExists);
-      res.send(userExists);
+      console.log('result',userInfo);
+      req.session.userID = userInfo.userID;
+      res.send(userInfo);
     }
   })
 });
