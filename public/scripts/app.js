@@ -21,7 +21,7 @@ $("#login-button").click(function(){
     });
 
   $("#reveal-new-card").click(function(){
-     $("#create-card").slideToggle("slow");
+     $("#create-card-section").slideToggle("slow");
     });
 
   $("#create-new-board").click(function(){
