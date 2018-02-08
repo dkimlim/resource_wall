@@ -5,6 +5,12 @@ $(() => {
     }
   });
 
+  $("#create-new-board").on('click', function (allBoards) {
+  });
+    // $.post("/car)ds", (newCard) => {
+    //   let templateVars = { };
+    // })
+
 $("#register-button").click(function(){
        $(".register-form").slideToggle("slow");
     });
@@ -12,16 +18,12 @@ $("#register-button").click(function(){
 $("#login-button").click(function(){
         $(".login-form").slideToggle("slow");
     });
-  $("#create-new-board").on('click', function (allBoards) {
-    // $.post("/cards", (newCard) => {
-    //   let templateVars = { };
-    // })
 
-$("#reveal-new-card").click(function(){
+  $("#reveal-new-card").click(function(){
      $("#create-card").slideToggle("slow");
     });
 
-$("#create-new-board").click(function(){
+  $("#create-new-board").click(function(){
     $("#new-board").slideToggle("slow");
      });
 });

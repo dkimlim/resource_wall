@@ -27,7 +27,6 @@ app.use(morgan('dev'));
 // Log knex SQL queries to STDOUT as well
 app.use(knexLogger(knex));
 
-app.use(cookieSession ({
 app.use(cookieSession({
   name: "session",
   keys: ["key1", "key2", "key3"]
@@ -55,34 +54,19 @@ app.get("/", (req, res) => {
   res.render("index", isLoggedIn);
 });
 
-app.get("/login", (req, res) => {
-  const isLoggedIn = DataHelpers.loggedIN(req.session)
-  res.status(200).send(isLoggedIn)
-    });
-
 app.post("/login", (req, res) => {
   DataHelpers.checkUser({email: req.body.email, password: req.body.password}, (err, userInfo) => {
-  DataHelpers.checkUser({
-    email: 'bob@bob.com',
-    password: 'bob'
-  }, (err, userInfo) => {
     if (err) {
       console.error("problems");
       res.status(403).send();
     } else {
       console.log('result',userInfo);
-      console.log('result', userInfo);
       req.session.userID = userInfo.userID;
       res.send(userInfo);
     }
   })
 });
 
-
-app.get("/logout", (req, res) => {
-  req.session = null;
-  res.send("logged out");
-})
 
 //This  adds a new card to the card database and then returns all the cards present
 app.post("/cards", (req, res) => {
@@ -105,6 +89,8 @@ app.post("/boards", (req, res) => {
   const boardAdded = DataHelpers.addNewBoard(boardInfo)
   res.send(200);
 });
+
+
 
 app.post("/register", (req, res, err) => {
   const userData = {
