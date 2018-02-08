@@ -13,7 +13,6 @@ $("#login-button").click(function(){
         $(".login-form").slideToggle("slow");
     });
 
-
 $("#reveal-new-card").click(function(){
      $("#create-card").slideToggle("slow");
     });
