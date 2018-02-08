@@ -13,6 +13,7 @@ const knexConfig  = require("./knexfile");
 const knex        = require("knex")(knexConfig[ENV]);
 const morgan      = require('morgan');
 const knexLogger  = require('knex-logger');
+const DataHelpers = require('./lib/data-helpers.js')(knex);
 
 // Seperated Routes for each Resource
 const usersRoutes = require("./routes/users");
@@ -41,6 +42,14 @@ app.use("/api/users", usersRoutes(knex));
 // Home page
 app.get("/", (req, res) => {
   res.render("index");
+});
+
+app.get("/login", (req, res) => {
+  const userExists = DataHelpers.checkUser({email:'alice@alice.com', password:'alice'}, (err, userExists) => {
+    if(err) console.error("problems");
+    console.log(userExists);
+    res.json({val: userExists});
+  })
 });
 
 app.listen(PORT, () => {
