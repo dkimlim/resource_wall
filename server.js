@@ -27,7 +27,8 @@ app.use(morgan('dev'));
 // Log knex SQL queries to STDOUT as well
 app.use(knexLogger(knex));
 
-app.use(cookieSession({
+
+app.use(cookieSession ({
   name: "session",
   keys: ["key1", "key2", "key3"]
 }));

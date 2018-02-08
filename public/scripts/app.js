@@ -1,9 +1,10 @@
 $(() => {
   $.get("/api/users", (users) => {
-    for(user of users) {
+    for (user of users) {
       $("<div>").text(user.name).appendTo($("body"));
     }
   });
+
 
   $("#create-new-board").on('click', function (allBoards) {
   });
@@ -25,5 +26,14 @@ $("#login-button").click(function(){
 
   $("#create-new-board").click(function(){
     $("#new-board").slideToggle("slow");
+  });
+
+
+$("#comment-box-open").click(function(){
+    $("#comment-box").slideToggle("slow");
+     });
+
+$("#comments-display").click(function(){
+    $(".comment-container").slideToggle("slow");
      });
 });
