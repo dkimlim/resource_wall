@@ -91,8 +91,6 @@ app.post("/boards", (req, res) => {
   res.send(200);
 });
 
-
-
 app.post("/register", (req, res, err) => {
   const userData = {
     username: req.body.username,
