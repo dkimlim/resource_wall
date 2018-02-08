@@ -11,6 +11,7 @@
     <!-- App CSS -->
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
     <link rel="stylesheet" href="/styles/nav-bar.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/create-card.css" type="text/css" />
     <link rel="stylesheet" href="/styles/friends-side-bar.css" type="text/css" />
     <link rel="stylesheet" href="/styles/login.css" type="text/css" />
     <link rel="stylesheet" href="/styles/register.css" type="text/css" />
@@ -25,8 +26,9 @@
   </head>
 
   <body>
-    <header>
+     <header>
         <% include ./partials/_nav-bar %>
+        <% include ./partials/_create-card %>
       </header>
       <% include ./partials/_friends-side-bar %>
     <!-- Add flex box around where the pins are going to be stored -->
@@ -35,7 +37,6 @@
       <% include ./partials/_login %>
       <% include ./partials/_register %>
 
-      
-    
+
   </body>
 </html>
