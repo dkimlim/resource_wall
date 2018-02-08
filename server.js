@@ -65,6 +65,11 @@ app.get("/login", (req, res) => {
   })
 });
 
+app.get("/logout", (req, res) => {
+  req.session = null;
+  res.send("logged out");
+})
+
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
 });
