@@ -28,6 +28,7 @@ app.use(morgan('dev'));
 app.use(knexLogger(knex));
 
 app.use(cookieSession ({
+app.use(cookieSession({
   name: "session",
   keys: ["key1", "key2", "key3"]
 }));
@@ -61,11 +62,16 @@ app.get("/login", (req, res) => {
 
 app.post("/login", (req, res) => {
   DataHelpers.checkUser({email: req.body.email, password: req.body.password}, (err, userInfo) => {
+  DataHelpers.checkUser({
+    email: 'bob@bob.com',
+    password: 'bob'
+  }, (err, userInfo) => {
     if (err) {
       console.error("problems");
       res.status(403).send();
     } else {
       console.log('result',userInfo);
+      console.log('result', userInfo);
       req.session.userID = userInfo.userID;
       res.send(userInfo);
     }
@@ -77,6 +83,52 @@ app.get("/logout", (req, res) => {
   req.session = null;
   res.send("logged out");
 })
+
+//This  adds a new card to the card database and then returns all the cards present
+app.post("/cards", (req, res) => {
+  let cardInfo = {
+    url: req.body["card-url"],
+    tags: req.body.tags,
+    boardID: req.body["board-id"]
+  };
+  DataHelpers.addNewCard(cardInfo);
+  //We will have to change this to get userSpecific cards
+  const allCards = DataHelpers.getAllCards(req.session);
+  res.send(200, allCards);
+});
+
+app.post("/boards", (req, res) => {
+  let boardInfo = {
+    name: req.body["boardname"],
+    userID: req.session.userID
+  }
+  const boardAdded = DataHelpers.addNewBoard(boardInfo)
+  res.send(200);
+});
+
+app.post("/register", (req, res, err) => {
+  const userData = {
+    username: req.body.username,
+    email: req.body.email,
+    password: req.body.password
+  };
+
+  DataHelpers.isUserAlreadyExist(userData, (isExist) => {
+      if (isExist) {
+        //If this exists, then user information is not unique in db.
+        console.error("problems");
+        res.status(401).send();
+      } else {
+        DataHelpers.insertNewUser(userData);
+        res.send();
+      }
+    },
+    error => {
+      res.status(500).send(error.error);
+    }
+  )
+});
+
 
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);

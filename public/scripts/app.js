@@ -12,6 +12,10 @@ $("#register-button").click(function(){
 $("#login-button").click(function(){
         $(".login-form").slideToggle("slow");
     });
+  $("#create-new-board").on('click', function (allBoards) {
+    // $.post("/cards", (newCard) => {
+    //   let templateVars = { };
+    // })
 
 $("#reveal-new-card").click(function(){
      $("#create-card").slideToggle("slow");
@@ -20,13 +24,4 @@ $("#reveal-new-card").click(function(){
 $("#create-new-board").click(function(){
     $("#new-board").slideToggle("slow");
      });
-
-$("#comment-box-open").click(function(){
-    $("#comment-box").slideToggle("slow");
-     });
-
-$("#comments-display").click(function(){
-    $(".comment-container").slideToggle("slow");
-     });
-
 });
