@@ -5,6 +5,13 @@ $(() => {
     }
   });
 
+$("#register-button").click(function(){
+       $(".register-form").slideToggle("slow");
+    });
+
+$("#login-button").click(function(){
+        $(".login-form").slideToggle("slow");
+    });
 
 
 $("#reveal-new-card").click(function(){

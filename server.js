@@ -49,7 +49,9 @@ app.use("/api/users", usersRoutes(knex));
 
 // Home page
 app.get("/", (req, res) => {
-  res.render("index");
+  const isLoggedIn = {isLoggedIn: DataHelpers.loggedIn(req.session)}
+  res.status(200);
+  res.render("index", isLoggedIn);
 });
 
 app.get("/login", (req, res) => {

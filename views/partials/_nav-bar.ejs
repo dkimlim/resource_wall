@@ -1,3 +1,5 @@
+
+
 <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
   <a class="navbar-brand" href="#">ResWall</a>
   <div>
@@ -6,11 +8,15 @@
         <input class="form-control mr-sm-2" type="text" placeholder="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
       </form>
-      <button class="btn btn-outline-success login-button" type="button">Login</button>
-      <button class="btn btn-sm align-middle btn-outline-secondary reg-button" type="button">Register</button>
-      <button class="btn btn-sm align-middle btn-outline-secondary my-board-button" type="button">MyBoards</button>
-      <button class="btn btn-sm align-middle btn-outline-secondary following-button" type="button">Following</button>
-      <button id="reveal-new-card" class="btn btn-sm align-middle btn-outline-secondary add-res-button" type="button">CreateCard</button>
+        <% if (isLoggedIn) { %>
+          <button class="btn btn-sm align-middle btn-outline-secondary my-board-button" type="button">MyBoards</button>
+          <button class="btn btn-sm align-middle btn-outline-secondary following-button" type="button">Following</button>
+          <button id="reveal-new-card" class="btn btn-sm align-middle btn-outline-secondary add-res-button" type="button">CreateCard</button>
+        <% } else { %>
+          <button id="login-button" class="btn btn-outline-success login-button" type="button">Login</button>
+          <button id="register-button"class="btn btn-sm align-middle btn-outline-secondary reg-button" type="button">Register</button>
+        <% } %>
+
     </div>
   </div>
 </nav>
