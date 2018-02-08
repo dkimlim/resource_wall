@@ -45,7 +45,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/login", (req, res) => {
-  const userExists = DataHelpers.checkUser({email:'alice@alice.com', password:'alice'}, (err, userExists) => {
+  const userExists = DataHelpers.checkUser({email:'alice@alice.com', password:'alicea'}, (err, userExists) => {
     if(err) console.error("problems");
     console.log(userExists);
     res.json({val: userExists});
