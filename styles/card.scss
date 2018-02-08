@@ -1,0 +1,21 @@
+.card {
+  display: inline-block;
+  background-color: light green;
+  position: relative;
+  margin: 15px auto;
+  border: 1px solid grey;
+  border-radius: 0.5em;
+}
+
+
+#comment-box {
+  display: none;
+}
+
+.comment-container {
+  display: none;
+}
+
+.card .indv-comment {
+  border-top: 1px solid #B6B7C1
+}

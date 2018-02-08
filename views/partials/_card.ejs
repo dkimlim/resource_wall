@@ -1,5 +1,40 @@
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <script src="https://use.fontawesome.com/89163c727c.js"></script>
+     <link rel="stylesheet" href="/node_modules/css-star-rating/dist/css/star-rating.css">
+  </head>
+
 <div class="card">
-    <header class="card-header"></header>
-    <main class="card-img"></main>
-    <footer class="card-tags"></footer>
+  <header>
+    <h1><a  class="card-title" href="https://www.google.com">Card Title</a></h1>
+  </header>
+
+  <div class ="card-image">
+    <img class="website-preview" src="URLtoWebsite"  >
+  </div>
+
+  <summary>
+    <p class="card-tags"> #javascript #SQL #Left Join</p>
+     <span class="user-name"> Saved by <b> Beyonce </b></span>
+      <actions class="card-reaction">
+        <i class="fa fa-heart" aria-hidden="true"></i>
+        <span class="likes-value"> 1 </span>
+        <button id="comment-box-open" class="btn btn-outline-success my-2 my-sm-0" type="button">Add comment</button>
+        <form id="comment-box" class="commentbox" action="/comments" method="post" >
+          <textarea id="text-area" class="text-area" name="text" placeholder=  "What do you think of this resource?"></textarea>
+          <input id="comment-submit"  class="comment-submit" type="submit" value="Reply">
+        </form>
+<!--star rating here ...  tried plugin npm install css-star-rating need to tweek so deleted the related code for now-->
+      </actions>
+  </summary>
+
+  <section class="comments">
+    <button id="comments-display" class="btn btn-outline-success my-2 my-sm-0" type="button">Display Comments</button>
+     <section class="comment-container">
+    <div class="indv-comment">
+     <span class="commenter-name"><b> JAYZ </b>says...</span>
+     <p class="card-comment"> this is a great resource</p>
+   </div>
+  </section>
 </div>
