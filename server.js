@@ -2,17 +2,19 @@
 
 require('dotenv').config();
 
-const PORT        = process.env.PORT || 8080;
-const ENV         = process.env.ENV || "development";
-const express     = require("express");
-const bodyParser  = require("body-parser");
-const sass        = require("node-sass-middleware");
-const app         = express();
+const PORT = process.env.PORT || 8080;
+const ENV = process.env.ENV || "development";
+const express = require("express");
+const bodyParser = require("body-parser");
+const sass = require("node-sass-middleware");
+const app = express();
 
-const knexConfig  = require("./knexfile");
-const knex        = require("knex")(knexConfig[ENV]);
-const morgan      = require('morgan');
-const knexLogger  = require('knex-logger');
+const knexConfig = require("./knexfile");
+const knex = require("knex")(knexConfig[ENV]);
+const morgan = require('morgan');
+const knexLogger = require('knex-logger');
+const DataHelpers = require('./lib/data-helpers.js')(knex);
+const cookieSession = require('cookie-session');
 
 // Seperated Routes for each Resource
 const usersRoutes = require("./routes/users");
@@ -25,8 +27,15 @@ app.use(morgan('dev'));
 // Log knex SQL queries to STDOUT as well
 app.use(knexLogger(knex));
 
+app.use(cookieSession ({
+  name: "session",
+  keys: ["key1", "key2", "key3"]
+}));
+
 app.set("view engine", "ejs");
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 app.use("/styles", sass({
   src: __dirname + "/styles",
   dest: __dirname + "/public/styles",
@@ -42,6 +51,24 @@ app.use("/api/users", usersRoutes(knex));
 app.get("/", (req, res) => {
   res.render("index");
 });
+
+app.get("/login", (req, res) => {
+  DataHelpers.checkUser({email: 'bob@bob.com',password: 'bob'}, (err, userInfo) => {
+    if (err) {
+      console.error("problems");
+      res.status(403).send();
+    } else {
+      console.log('result',userInfo);
+      req.session.userID = userInfo.userID;
+      res.send(userInfo);
+    }
+  })
+});
+
+app.get("/logout", (req, res) => {
+  req.session = null;
+  res.send("logged out");
+})
 
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
