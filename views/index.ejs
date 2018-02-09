@@ -46,7 +46,9 @@
 
       <% include ./partials/_login %>
       <% include ./partials/_register %>
-       <% include ./partials/_card %>
+      <% for (card in topLikedCards){ %>
+          <%- include('./partials/_card', {cardInfo: topLikedCards[card]}) %>
+      <% } %>
 
   </body>
 </html>

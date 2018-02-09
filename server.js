@@ -51,18 +51,35 @@ app.use("/api/users", usersRoutes(knex));
 // Home page
 app.get("/", (req, res) => {
   const isLoggedIn = {isLoggedIn: DataHelpers.loggedIn(req.session)}
-  console.log(isLoggedIn)
+  const templateVars = {isLoggedIn: isLoggedIn};
   res.status(200);
-  if(isLoggedIn){
-    const userBoards = {isLoggedIn: DataHelpers.getUserBoards(req.session)}
-      console.log("userboards " + userBoards)
+  if(isLoggedIn.isLoggedIn){
+    // const userBoards = {isLoggedIn: DataHelpers.getUserBoards(req.session)}
+     DataHelpers.getUserCards(req.session, (err, result) => {
+        templateVars.topLikedCards = result;
+        DataHelpers.getTagsForCard(result[0].cardid, (err, result) => {
+          console.log('result = ', result);
+          templateVars.topLikedCards[0].tags = result[0].name;
+          res.render("index", templateVars);
+        });
+     });
    // res.render("index", isLoggedIn, userBoards )
     // console.log("is logged in" + isLoggedIn)
- res.render("index", isLoggedIn);
-  } else {
-       console.log("not logged in" + isLoggedIn)
-     res.render("index", isLoggedIn);
-
+} else {
+    let templateVars = {isLoggedIn: isLoggedIn};
+    DataHelpers.getMostLikedCards((err, topLikedCards) => {
+       templateVars.topLikedCards = topLikedCards;
+      //  console.log(topLikedCards);
+       for(let card in topLikedCards) {
+         DataHelpers.getTagsForCard(topLikedCards[card].cardid, (err, tag) => {
+           templateVars.topLikedCards[card].tags = tag[0].name;
+           if(card == (topLikedCards.length-1)) {
+              res.render("index", templateVars);
+           }
+        })
+      }
+    });
+    
   }
 });
 
@@ -102,11 +119,9 @@ app.post("/cards", (req, res) => {
   };
   DataHelpers.addNewCard(cardInfo);
   //We will have to change this to get userSpecific cards
-  const allCards = DataHelpers.getAllCards(req.session);
+  const allCards = DataHelpers.getAllCards();
   res.send(200, allCards);
 });
-
-
 
 app.post("/boards", (req, res) => {
   let boardInfo = {
