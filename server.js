@@ -50,15 +50,21 @@ app.use("/api/users", usersRoutes(knex));
 
 // Home page
 app.get("/", (req, res) => {
-  const isLoggedIn = {isLoggedIn: DataHelpers.loggedIn(req.session)}
-  console.log(isLoggedIn)
+ const isLoggedIn = {isLoggedIn: DataHelpers.loggedIn(req.session)}
+  //console.log(isLoggedIn)
   res.status(200);
   if(isLoggedIn){
-    const userBoards = {isLoggedIn: DataHelpers.getUserBoards(req.session)}
-      console.log("userboards " + userBoards)
-   // res.render("index", isLoggedIn, userBoards )
+    DataHelpers.getUserBoards(req.session, (err, result) => {
+       const templateVars = {userBoards: result, isLoggedIn: DataHelpers.loggedIn(req.session)}
+       console.log(templateVars.userBoards);
+        res.render("index", templateVars);
+    })
+   // const userBoards = {userBoards: DataHelpers.getUserBoards(req.session)}
+    //  console.log("userboards " + userBoards)
+      // console.log("templateVars ", DataHelpers.getUserBoards(req.session))
+
     // console.log("is logged in" + isLoggedIn)
- res.render("index", isLoggedIn);
+ //res.render("index", isLoggedIn);
   } else {
        console.log("not logged in" + isLoggedIn)
      res.render("index", isLoggedIn);
