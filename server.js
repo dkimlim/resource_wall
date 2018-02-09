@@ -63,11 +63,17 @@ app.post("/login", (req, res) => {
     } else {
       console.log('result',userInfo);
       req.session.userID = userInfo.userID;
-      res.send(userInfo);
+      res.redirect("/");
     }
   })
 });
 
+app.post("/logout", (req, res) => {
+  console.log("clearing cookie")
+  req.session = null;
+
+  res.redirect("/");
+})
 
 //This  adds a new card to the card database and then returns all the cards present
 app.post("/cards", (req, res) => {
