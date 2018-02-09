@@ -83,12 +83,25 @@ app.get("/", (req, res) => {
   }
 });
 
-//GET USER BOARDS
+/////   GET USER BOARDS  ////
   app.get("/user/boards", (req, res) => {
     const userBoards = {isLoggedIn: DataHelpers.getUserBoards(req.session)}
     res.status(200);
     res.send(userBoards);
   });
+
+/////   POST NEW USER BOARDS INFO  ////
+  app.post("/user/boards", (req, res) => {
+    let newBoardInfo = {
+     name: req.body["name"],
+     userid: req.session.userID
+    }
+    let NewUserBoard = DataHelpers.addNewUserBoards(newBoardInfo)
+    console.log(NewUserBoard)
+    res.status(200);
+    res.send(NewUserBoard);
+  });
+
 
 app.post("/login", (req, res) => {
   DataHelpers.checkUser({email: req.body.email, password: req.body.password}, (err, userInfo) => {

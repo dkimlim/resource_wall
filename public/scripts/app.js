@@ -38,29 +38,38 @@ $(() => {
       window.location.replace("/");
     })
   })
-///////
+///////// NEW BOARD ADD.... SUBMIT //////////
+ $("#add-board-button").on('click', function (event) {
+    event.preventDefault();
+      const  newBoardName = $('#new-board').val();
+      console.log("newBoardName", newBoardName)
+    postNewBoard(newBoardName)
+    })
 
+ function postNewBoard(postNewBoardName){
+
+   $.ajax({
+    url: `/user/boards`,
+    method: 'POST',
+    data:  {name: postNewBoardName},
+    success: function () {
+      console.log("ajax" , postNewBoardName)
+      $('#new-board').val("")
+      setTimeout(window.location = ".", 600)
+              }
+   })
+  }
 
 ///////// NEW CARDS SUBMIT //////////
   $('#new-card').on('submit', function(event) {
-
    event.preventDefault();
- // console.log($(this).find('#validationDefault01').val());
- // console.log($('option:selected',this).val());
-  //console.log($(this).find('#validationDefault02').val());
- // console.log($(this).find('#validationDefault03').val());
-// console.log($(this).serialize())
-// console.log($(this))
-
-
-//     console.log(formDataStr)
-   //const formDataStr = $(this).serialize()
+ //const formDataStr = $(this).serialize()
    const  cardTitle = $(this).find('#validationDefault01').val();
    const  boardID = $('option:selected',this).val();
+   const  boardName = $('option:selected',this).text();
    const  newCardULR = $(this).find('#validationDefault02').val();
    const  newCardtags = $(this).find('#validationDefault03').val();
-   // const  userid= $(this).cookie('userid');
-  console.log("newCardULR " + newCardULR, "boardID " + boardID, "newCardtags" + newCardtags, "cardTitle " +  cardTitle)
+        console.log("newCardULR:", newCardULR, "boardID:", boardID, "newCardtags:", newCardtags, "cardTitle:",cardTitle, "boardName:", boardName)
 // ????  is the this all the above info????
       postCards($(this).serialize())
 
