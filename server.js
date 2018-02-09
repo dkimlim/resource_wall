@@ -51,9 +51,27 @@ app.use("/api/users", usersRoutes(knex));
 // Home page
 app.get("/", (req, res) => {
   const isLoggedIn = {isLoggedIn: DataHelpers.loggedIn(req.session)}
+  console.log(isLoggedIn)
   res.status(200);
-  res.render("index", isLoggedIn);
+  if(isLoggedIn){
+    const userBoards = {isLoggedIn: DataHelpers.getUserBoards(req.session)}
+      console.log("userboards " + userBoards)
+   // res.render("index", isLoggedIn, userBoards )
+    // console.log("is logged in" + isLoggedIn)
+ res.render("index", isLoggedIn);
+  } else {
+       console.log("not logged in" + isLoggedIn)
+     res.render("index", isLoggedIn);
+
+  }
 });
+
+//GET USER BOARDS
+  app.get("/user/boards", (req, res) => {
+    const userBoards = {isLoggedIn: DataHelpers.getUserBoards(req.session)}
+    res.status(200);
+    res.send(userBoards);
+  });
 
 app.post("/login", (req, res) => {
   DataHelpers.checkUser({email: req.body.email, password: req.body.password}, (err, userInfo) => {
@@ -88,6 +106,8 @@ app.post("/cards", (req, res) => {
   res.send(200, allCards);
 });
 
+
+
 app.post("/boards", (req, res) => {
   let boardInfo = {
     name: req.body["boardname"],
@@ -119,6 +139,10 @@ app.post("/register", (req, res, err) => {
     }
   )
 });
+
+
+
+
 
 
 app.listen(PORT, () => {

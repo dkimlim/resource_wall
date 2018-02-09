@@ -49,12 +49,12 @@ $(() => {
  // console.log($('option:selected',this).val());
   //console.log($(this).find('#validationDefault02').val());
  // console.log($(this).find('#validationDefault03').val());
- console.log($(this).serialize())
- console.log($(this))
+// console.log($(this).serialize())
+// console.log($(this))
 
 
-     console.log(formDataStr)
-   const formDataStr = $(this).serialize()
+//     console.log(formDataStr)
+   //const formDataStr = $(this).serialize()
    const  cardTitle = $(this).find('#validationDefault01').val();
    const  boardID = $('option:selected',this).val();
    const  newCardULR = $(this).find('#validationDefault02').val();

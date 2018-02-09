@@ -19,7 +19,8 @@
         <div class="choose-board">
           <label for="choose-board">Select a board to add your card to</label>
             <select class="custom-select">
-                <option selected>Starter Board</option>
+              <!--    <option selected>Starter Board</option> -->
+<=%boardOption %>
                 <option value="boardId:A">A</option>
             </select>
         </div>
@@ -33,10 +34,13 @@
       <button class="btn btn-primary" type="submit">Submit form</button>
   </form>
   <script>
-   /*
-   for(board in boards){
-     boardOption = <option value="boardId">boardName</option>
-      return  boardOption
+
+   function indvBoards(userBoards){
+   boardOption = []
+   for(board in userBoards){
+     boardOption.push($(<option ="boardId">boardName</option>)
+     }
+      return boardOption
   }
   */
 </script>
