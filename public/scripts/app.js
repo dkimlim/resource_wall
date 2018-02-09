@@ -5,7 +5,7 @@ $(() => {
     }
   });
 
-  $("#create-new-board").on('click', function (allBoards) {});
+  $("#create-new-board").on('click', function (allBoards) { });
   // $.post("/car)ds", (newCard) => {
   //   let templateVars = { };
   // })
@@ -22,11 +22,56 @@ $(() => {
     $("#create-card-section").slideToggle("slow");
   });
 
-  $("#create-new-board").click(function () {
-    $("#new-board").slideToggle("slow");
-    $("#add-board-button").slideToggle("slow");
+    $("#comment-box-open").click(function () {
+    $("#comment-box").slideToggle("slow");
   });
-//THIS IS THE NEW CARD////
+
+  $("#comments-display").click(function () {
+    $(".comment-container").slideToggle("slow");
+  });
+
+  $("#logout-button").on('click', function () {
+    console.log("logout clicked")
+    $.post("/logout", () => {
+      console.log("logged out");
+      //This redirects the window back to the home page
+      window.location.replace("/");
+    })
+  })
+///////
+
+  $('.new-card').on('submit', function (event) {
+
+   event.preventDefault();
+    console.log($(this).find('#card-title-text').val())
+   // console.log($(this).find('#card-ulr').val()
+  //  console.log($(this).find('#card-tags-text.form-control').val()
+   //    console.log($(this).cookie('userid');
+
+   const  boardName = $(this).find('#card-title-text').val()
+   const  newCardULR = $(this).find('#card-ulr').val();
+  // const  userid= $(this).cookie('userid');
+   const  newCardtags = $(this).find('#card-tags-text.form-control').val();
+
+console.log("newCardULR " + newCardULR, "boardName" + boardName, "userid" + userid, "newCardtags" + newCardtags)
+/*
+    const errorMessage = validateFormData(formDataStr);
+    console.log(errorMessage)
+    if(errorMessage){
+     alert(errorMessage)
+    } else {
+
+// ????  is the this all the above info????
+      postCards($(this).serialize())
+  }*/
+ });
+
+
+});
+
+/*
+
+//THIS IS THE NEW CARD ////
   function createCardElement (cardObj) {
     $card = $("<article>").addClass("card");
 
@@ -45,7 +90,6 @@ $(() => {
         <span class="likes-value"> ${cardObj.user.card.likes} </span>
      </actions>
 `;
-
     $card = $card.append(cardInfo);
     return $card;
   }
@@ -55,31 +99,19 @@ $(() => {
    cardBoard.empty()
     //prepend to render ontop of old tweets....append would be for bottom
    for(let card in cards) {
-    cardBoard.prepend(createTweetElement(tweets[tweet]));
+    cardBoard.prepend(createCardElement(cards[cards]));
    }
   }
 
-///////// NEW CARDS SUBMIT //////////
-
-$('.dropdown-item').click(function(){
-
-  //add a function to stop sumit if any feilds empty
-
-   var newCardULR = $('#card-title-text').val('');
-   var boardName = $(this).parent().data('id'),
-   var userid= $.cookie('userid');
-   var newCardtags = $('#card-tags-text').val('');
-
-   console.log(newCardULR, boardName, userid)
-
- function postCards(formDataStr){
+//#2 1.a
+  function postTweets(formDataStr){
    $.ajax({
-    url: `/cards`,
+    url: `/tweets`,
     method: 'POST',
     data: formDataStr,
     success: function () {
      $('#text-area').val('');
-      getCards()
+      getTweets()
               }
    })
   }
@@ -90,36 +122,55 @@ $('.dropdown-item').click(function(){
   return div.innerHTML;
   }
 //#3
-  function getCards(){
+  function getTweets(){
     $.ajax({
-      url: `/cards`,
+      url: `/tweets`,
       method: 'GET',
       success: function (data) {
         console.log(data)
-        renderCards(data);
+        renderTweets(data);
       }
     });
   }
-}
+
+//#1.b Discern appropriate ERROR message for empty tweet or too many characters
+  function validateFormData (text) {
+    console.log(text)
+    let errorMessage = ""
+     if(text == ""){
+      errorMessage = "your tweet is empty"
+     } else if (text.length > 140){
+       errorMessage = "your tweet is too long"
+     }
+     return errorMessage
+  }
+///////// NEW CARDS SUBMIT //////////
+
+ $('.create-card').on('submit', function (event) {
+
+   event.preventDefault();
+// ????  is the this the value of the drop down selected?????
+   const  boardName = $(this).val(),
+   const  newCardULR = $('#card-title-text').val();
+   const  userid= $.cookie('userid');
+   const  newCardtags = $('#card-tags-text').val();
+
+console.log("newCardULR " + newCardULR, "boardName" + boardName, "userid" + userid, "newCardtags" + newCardtags)
+
+    const errorMessage = validateFormData(formDataStr);
+    console.log(errorMessage)
+    if(errorMessage){
+     alert(errorMessage)
+    } else {
+
+// ????  is the this all the above info????
+      postCards($(this).serialize())
+  }
+ });
+
+
+*/
 
 
 
 
-  $("#comment-box-open").click(function () {
-    $("#comment-box").slideToggle("slow");
-  });
-
-  $("#comments-display").click(function () {
-    $(".comment-container").slideToggle("slow");
-  });
-
-  $("#logout-button").on('click', function () {
-    console.log("logout clicked")
-    $.post("/logout", () => {
-      console.log("logged out");
-      //This redirects the window back to the home page
-      window.location.replace("/");
-    })
-  })
-
-});

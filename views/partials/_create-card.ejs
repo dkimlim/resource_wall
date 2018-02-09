@@ -1,34 +1,37 @@
-   <section id="create-card-section" class="new-card col-md-5" >
-    <h2 class="h2">Create Card</h2>
-    <!-- We are saving to a specific board -->
-    <form id="create-card" class="create-card" action="/cards" method="post" >
-     <textarea id="card-title-text" class="text-area" name="card-url" placeholder=  "  EX:StackOverFlow: SQL Joins"></textarea>
-     <img class="website-preview" src="URLtoWebsite"  >
-     <h3 class="h3">#TAGS</h3>
-     <textarea id="card-tags-text" class="text-area" name="tags" placeholder=  " Add category tags ex: #SQLjoins #LeftJoin"></textarea>
-     <section class="new-card-board-info">
-       <h3 class="h3">Add to board</h3>
-       <button id="create-new-board" class="btn btn-outline-success my-2 my-sm-0" type="button">create new board</button>
-        <button id="add-board-button" class="btn btn-outline-success my-2 my-sm-0" type="button">Add Board</button>
-       <!--id="new-board-header"  should be hidden unless addboard button clicked -->
-       <input id="new-board" class="form-control mr-sm-2" type="text" name="new-board-name" placeholder="New Board Name">
+ <section id="create-card-section" class="new-card col-md-5" >
+<form class="new-card">
+  <div class="form-row">
+    <div class="col-md-4 mb-3">
+      <label for="validationDefault01">Card Title</label>
+      <input id="card-title-text" type="text" class="form-control" id="validationDefault01" placeholder="Enter a Title" required>
+    </div>
+    <div class="col-md-4 mb-3">
+      <label for="validationDefault02">ULR to Resource</label>
+      <input id="card-ulr" type="url" class="form-control" id="validationDefault02" placeholder="https://"  required>
+    </div>
+  <div class="form-row">
+    <div class="col-md-6 mb-3">
+      <label for="validationDefault03">Tags</label>
+      <input id="card-tags-text" type="text" class="form-control" id="validationDefault03" placeholder="#keyword #descriptor word" required>
+    </div>
+    <div class="choose-board">
+      <label for="choose-board">Select a board to add your card to</label>
+    <select class="custom-select">
+  <option selected>Starter Board</option>
+  <option value="1">javascript</option>
+  <option value="2">vinatge dresses</option>
+  <option value="3">Three</option>
+  <option value="4">4</option>
+  <option value="5">5</option>
+  <option value="6">6</option>
+</select>
+     <div class="form-row">
+    <div class="col-md-6 mb-3">
+      <label for="validationDefault03">...or create a new board</label>
+      <input id="new-board" type="text" class="form-control" id="validationDefault03" placeholder="new board name">
+       <button   id="add-board-button" class="btn btn-outline-success my-2 my-sm-0" type="button">Add Board</button>
 
-       <!--"save shows up in button when you hover on it could be same color as background and then changes to contrast when hover-->
-<!-- Example single danger button -->
-<div class="btn-group">
-  <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Add to Board
-  </button>
-  <div class="dropdown-menu">
-    <span id="" class="dropdown-item" href="#">Javascript</span>
-    <span id="" class="dropdown-item"  href="#">Vintage Dresses</span>
-    <span id="" class="dropdown-item"  href="#">Places to go</span>
-    <div class="dropdown-divider"></div>
-    <a class="dropdown-item" href="#">Create New Board</a>
-  </div>
-</div>
-
-     <!--   <button id="existing-board" class="btn btn-outline-success my-2 my-sm-0" type="submit">Existing Board "SAVE"</button>
-     </section> -->
-   </form>
- </section>
+    </div>
+  <button class="btn btn-primary" type="submit">Submit form</button>
+</form>
+</section?
