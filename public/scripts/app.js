@@ -55,7 +55,7 @@ $(() => {
     success: function () {
       console.log("ajax" , postNewBoardName)
       $('#new-board').val("")
-        addNewUserBoards()
+      setTimeout(window.location = ".", 600)
               }
    })
   }
