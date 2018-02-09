@@ -9,10 +9,26 @@
      <section class="new-card-board-info">
        <h3 class="h3">Add to board</h3>
        <button id="create-new-board" class="btn btn-outline-success my-2 my-sm-0" type="button">create new board</button>
+        <button id="add-board-button" class="btn btn-outline-success my-2 my-sm-0" type="button">Add Board</button>
        <!--id="new-board-header"  should be hidden unless addboard button clicked -->
        <input id="new-board" class="form-control mr-sm-2" type="text" name="new-board-name" placeholder="New Board Name">
+
        <!--"save shows up in button when you hover on it could be same color as background and then changes to contrast when hover-->
-       <button id="existing-board"class="btn btn-outline-success my-2 my-sm-0" type="submit">Existing Board "SAVE"</button>
-     </section>
+<!-- Example single danger button -->
+<div class="btn-group">
+  <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Add to Board
+  </button>
+  <div class="dropdown-menu">
+    <span id="" class="dropdown-item" href="#">Javascript</span>
+    <span id="" class="dropdown-item"  href="#">Vintage Dresses</span>
+    <span id="" class="dropdown-item"  href="#">Places to go</span>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="#">Create New Board</a>
+  </div>
+</div>
+
+     <!--   <button id="existing-board" class="btn btn-outline-success my-2 my-sm-0" type="submit">Existing Board "SAVE"</button>
+     </section> -->
    </form>
  </section>
