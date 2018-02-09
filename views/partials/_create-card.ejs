@@ -1,37 +1,36 @@
  <section id="create-card-section" class="new-card col-md-5" >
-<form class="new-card">
-  <div class="form-row">
-    <div class="col-md-4 mb-3">
-      <label for="validationDefault01">Card Title</label>
-      <input id="card-title-text" type="text" class="form-control" id="validationDefault01" placeholder="Enter a Title" required>
-    </div>
-    <div class="col-md-4 mb-3">
-      <label for="validationDefault02">ULR to Resource</label>
-      <input id="card-ulr" type="url" class="form-control" id="validationDefault02" placeholder="https://"  required>
-    </div>
-  <div class="form-row">
-    <div class="col-md-6 mb-3">
-      <label for="validationDefault03">Tags</label>
-      <input id="card-tags-text" type="text" class="form-control" id="validationDefault03" placeholder="#keyword #descriptor word" required>
-    </div>
-    <div class="choose-board">
-      <label for="choose-board">Select a board to add your card to</label>
-    <select class="custom-select">
-  <option selected>Starter Board</option>
-  <option value="1">javascript</option>
-  <option value="2">vinatge dresses</option>
-  <option value="3">Three</option>
-  <option value="4">4</option>
-  <option value="5">5</option>
-  <option value="6">6</option>
-</select>
-     <div class="form-row">
-    <div class="col-md-6 mb-3">
-      <label for="validationDefault03">...or create a new board</label>
-      <input id="new-board" type="text" class="form-control" id="validationDefault03" placeholder="new board name">
-       <button   id="add-board-button" class="btn btn-outline-success my-2 my-sm-0" type="button">Add Board</button>
-
-    </div>
-  <button class="btn btn-primary" type="submit">Submit form</button>
-</form>
+  <form id="new-card">
+        <div class="form-row">
+            <div class="col-md-5 mb-3">
+              <label for="validationDefault01">Card Title</label>
+              <input type="text" class="form-control" id="validationDefault01" placeholder="Enter a Title" required>
+            </div>
+          <div class="col-md-7 mb-3">
+            <label for="validationDefault02">ULR to Resource</label>
+            <input type="url" class="form-control" id="validationDefault02" placeholder="https://"  required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-md-12 mb-3">
+            <label for="validationDefault03">Tags</label>
+            <input type="text" class="form-control" id="validationDefault03" placeholder="#keyword #descriptor word" required>
+          </div>
+        </div>
+        <div class="choose-board">
+          <label for="choose-board">Select a board to add your card to</label>
+            <select class="custom-select">
+                <option selected>Starter Board</option>
+                <option value="boardId:javascript ">javascript</option>
+                <option value="boardId:vinatge dresses ">vinatge dresses</option>
+            </select>
+        </div>
+        <div class="form-row">
+          <div class="col-md-6 mb-3">
+            <label for="validationDefault03">...or create a new board</label>
+            <input id="new-board" type="text" class="form-control" id="validationDefault03" placeholder="new board name">
+             <button   id="add-board-button" class="btn btn-outline-success my-2 my-sm-0" type="button">Add Board</button>
+          </div>
+       </div>
+      <button class="btn btn-primary" type="submit">Submit form</button>
+  </form>
 </section?

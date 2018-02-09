@@ -40,31 +40,90 @@ $(() => {
   })
 ///////
 
-  $('.new-card').on('submit', function (event) {
+
+///////// NEW CARDS SUBMIT //////////
+  $('#new-card').on('submit', function(event) {
 
    event.preventDefault();
-    console.log($(this).find('#card-title-text').val())
-   // console.log($(this).find('#card-ulr').val()
-  //  console.log($(this).find('#card-tags-text.form-control').val()
-   //    console.log($(this).cookie('userid');
+ // console.log($(this).find('#validationDefault01').val());
+ // console.log($('option:selected',this).val());
+  //console.log($(this).find('#validationDefault02').val());
+ // console.log($(this).find('#validationDefault03').val());
+  console.log($(this).serialize())
 
-   const  boardName = $(this).find('#card-title-text').val()
-   const  newCardULR = $(this).find('#card-ulr').val();
-  // const  userid= $(this).cookie('userid');
-   const  newCardtags = $(this).find('#card-tags-text.form-control').val();
-
-console.log("newCardULR " + newCardULR, "boardName" + boardName, "userid" + userid, "newCardtags" + newCardtags)
-/*
-    const errorMessage = validateFormData(formDataStr);
-    console.log(errorMessage)
-    if(errorMessage){
-     alert(errorMessage)
-    } else {
-
+   const  cardTitle = $(this).find('#validationDefault01').val();
+   const  boardID = $('option:selected',this).val();
+   const  newCardULR = $(this).find('#validationDefault02').val();
+   const  newCardtags = $(this).find('#validationDefault03').val();
+   // const  userid= $(this).cookie('userid');
+  console.log("newCardULR " + newCardULR, "boardID " + boardID, "newCardtags" + newCardtags, "cardTitle " +  cardTitle)
 // ????  is the this all the above info????
       postCards($(this).serialize())
-  }*/
+
  });
+
+  function postCards(formDataStr){
+   $.ajax({
+    url: `/cards`,
+    method: 'POST',
+    data: formDataStr,
+    success: function () {
+      $(this).find('#validationDefault01').val(""); //clear  cardTitle
+      //$('option:selected',this).val(); //no need to clear selected wheel
+      $(this).find('#validationDefault02').val(""); //clear   newCardULR
+      $(this).find('#validationDefault03').val("");// clear  newCardtags
+      getCards()
+              }
+   })
+  }
+
+  function getCards(){
+    $.ajax({
+      url: `/cards`,
+      method: 'GET',
+      success: function (data) {
+        console.log(data)
+        renderCard(data);
+      }
+    });
+  }
+
+  function renderCard(cards) {
+   const cardBoard = $('.card-container');
+   cardBoard.empty()
+    //prepend to render ontop of old tweets....append would be for bottom
+   for(let card in cards) {
+    cardBoard.prepend(createCardElement(cards[cards]));
+   }
+  }
+
+  function escape(str) {
+    var div = document.createElement('div');
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+  }
+
+  function createCardElement (cardObj) {
+    $card = $("<article>").addClass("card");
+
+    let cardInfo = `
+
+<div class="card" style="width: 18rem;">
+    <h5><a  class="card-title" href=${cardObj.user.card.url}>Card Title</a></h5>
+  <img class="card-img-top" src=${cardObj.user.card.img} >
+  <div class="card-body">
+
+    <p class="card-tags">${cardObj.user.card.tags}</p>
+  </div>
+   <span class="user-name"> Saved by <b> ${cardObj.user.username}</b></span>
+      <actions class="card-reaction">
+        <i class="fa fa-heart" aria-hidden="true" type="submit"> </i>
+        <span class="likes-value"> ${cardObj.user.card.likes} </span>
+     </actions>
+`;
+    $card = $card.append(cardInfo);
+    return $card;
+  }
 
 
 });
@@ -104,9 +163,9 @@ console.log("newCardULR " + newCardULR, "boardName" + boardName, "userid" + user
   }
 
 //#2 1.a
-  function postTweets(formDataStr){
+  function postCards(formDataStr){
    $.ajax({
-    url: `/tweets`,
+    url: `/boardId`,
     method: 'POST',
     data: formDataStr,
     success: function () {
@@ -132,45 +191,6 @@ console.log("newCardULR " + newCardULR, "boardName" + boardName, "userid" + user
       }
     });
   }
-
-//#1.b Discern appropriate ERROR message for empty tweet or too many characters
-  function validateFormData (text) {
-    console.log(text)
-    let errorMessage = ""
-     if(text == ""){
-      errorMessage = "your tweet is empty"
-     } else if (text.length > 140){
-       errorMessage = "your tweet is too long"
-     }
-     return errorMessage
-  }
-///////// NEW CARDS SUBMIT //////////
-
- $('.create-card').on('submit', function (event) {
-
-   event.preventDefault();
-// ????  is the this the value of the drop down selected?????
-   const  boardName = $(this).val(),
-   const  newCardULR = $('#card-title-text').val();
-   const  userid= $.cookie('userid');
-   const  newCardtags = $('#card-tags-text').val();
-
-console.log("newCardULR " + newCardULR, "boardName" + boardName, "userid" + userid, "newCardtags" + newCardtags)
-
-    const errorMessage = validateFormData(formDataStr);
-    console.log(errorMessage)
-    if(errorMessage){
-     alert(errorMessage)
-    } else {
-
-// ????  is the this all the above info????
-      postCards($(this).serialize())
-  }
- });
-
-
 */
-
-
 
 
