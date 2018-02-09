@@ -155,6 +155,13 @@ app.post("/register", (req, res, err) => {
   )
 });
 
+//If #tag entered in search bar exists, server returns an array of cards that have that tagid. 
+//If it does not exist, an empty array is returned.
+app.post("/search", (req, res) => {
+  DataHelpers.findCardsforTag(req.body.tagname);
+  res.send(200, foundCards);
+});
+
 
 
 
