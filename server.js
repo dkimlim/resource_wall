@@ -51,7 +51,6 @@ app.use("/api/users", usersRoutes(knex));
 // Home page
 app.get("/", (req, res) => {
  const isLoggedIn = {isLoggedIn: DataHelpers.loggedIn(req.session)}
-  //console.log(isLoggedIn)
   res.status(200);
   if(isLoggedIn){
     DataHelpers.getUserBoards(req.session, (err, result) => {
@@ -59,12 +58,6 @@ app.get("/", (req, res) => {
        console.log(templateVars.userBoards);
         res.render("index", templateVars);
     })
-   // const userBoards = {userBoards: DataHelpers.getUserBoards(req.session)}
-    //  console.log("userboards " + userBoards)
-      // console.log("templateVars ", DataHelpers.getUserBoards(req.session))
-
-    // console.log("is logged in" + isLoggedIn)
- //res.render("index", isLoggedIn);
   } else {
        console.log("not logged in" + isLoggedIn)
      res.render("index", isLoggedIn);
@@ -72,12 +65,25 @@ app.get("/", (req, res) => {
   }
 });
 
-//GET USER BOARDS
+/////   GET USER BOARDS  ////
   app.get("/user/boards", (req, res) => {
     const userBoards = {isLoggedIn: DataHelpers.getUserBoards(req.session)}
     res.status(200);
     res.send(userBoards);
   });
+
+/////   POST NEW USER BOARDS INFO  ////
+  app.post("/user/boards", (req, res) => {
+    let newBoardInfo = {
+     name: req.body["name"],
+     userid: req.session.userID
+    }
+    let NewUserBoard = DataHelpers.addNewUserBoards(newBoardInfo)
+    console.log(NewUserBoard)
+    res.status(200);
+    res.send(NewUserBoard);
+  });
+
 
 app.post("/login", (req, res) => {
   DataHelpers.checkUser({email: req.body.email, password: req.body.password}, (err, userInfo) => {
