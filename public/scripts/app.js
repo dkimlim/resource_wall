@@ -49,8 +49,12 @@ $(() => {
  // console.log($('option:selected',this).val());
   //console.log($(this).find('#validationDefault02').val());
  // console.log($(this).find('#validationDefault03').val());
-  console.log($(this).serialize())
+ console.log($(this).serialize())
+ console.log($(this))
 
+
+     console.log(formDataStr)
+   const formDataStr = $(this).serialize()
    const  cardTitle = $(this).find('#validationDefault01').val();
    const  boardID = $('option:selected',this).val();
    const  newCardULR = $(this).find('#validationDefault02').val();
@@ -105,92 +109,26 @@ $(() => {
 
   function createCardElement (cardObj) {
     $card = $("<article>").addClass("card");
+    //do get request to get userId
 
     let cardInfo = `
-
-<div class="card" style="width: 18rem;">
-    <h5><a  class="card-title" href=${cardObj.user.card.url}>Card Title</a></h5>
-  <img class="card-img-top" src=${cardObj.user.card.img} >
-  <div class="card-body">
-
-    <p class="card-tags">${cardObj.user.card.tags}</p>
-  </div>
-   <span class="user-name"> Saved by <b> ${cardObj.user.username}</b></span>
-      <actions class="card-reaction">
-        <i class="fa fa-heart" aria-hidden="true" type="submit"> </i>
-        <span class="likes-value"> ${cardObj.user.card.likes} </span>
-     </actions>
-`;
+      <div class="card" style="width: 18rem;">
+        <h5><a  class="card-title" href=${escape(cardObj.user.card.url)}>${escape(cardObj.user.card.title)}</a></h5>
+        <img class="card-img-top" src=${img} >
+      <div class="card-body">
+        <p class="card-tags">${escape(cardObj.user.card.tags)}</p>
+      </div>
+       <span class="user-name"> Saved by <b> ${cardObj.user.username}</b></span>
+          <actions class="card-reaction">
+            <i class="fa fa-heart" aria-hidden="true" type="submit"> </i>
+            <span class="likes-value"> ${cardObj.user.card.likes} </span>
+         </actions>
+         </div>
+    `;
     $card = $card.append(cardInfo);
     return $card;
   }
 
 
 });
-
-/*
-
-//THIS IS THE NEW CARD ////
-  function createCardElement (cardObj) {
-    $card = $("<article>").addClass("card");
-
-    let cardInfo = `
-
-<div class="card" style="width: 18rem;">
-    <h5><a  class="card-title" href=${cardObj.user.card.url}>Card Title</a></h5>
-  <img class="card-img-top" src=${cardObj.user.card.img} >
-  <div class="card-body">
-
-    <p class="card-tags">${cardObj.user.card.tags}</p>
-  </div>
-   <span class="user-name"> Saved by <b> ${cardObj.user.username}</b></span>
-      <actions class="card-reaction">
-        <i class="fa fa-heart" aria-hidden="true" type="submit"> </i>
-        <span class="likes-value"> ${cardObj.user.card.likes} </span>
-     </actions>
-`;
-    $card = $card.append(cardInfo);
-    return $card;
-  }
-
-  function renderCard(cards) {
-   const cardBoard = $('.card-container');
-   cardBoard.empty()
-    //prepend to render ontop of old tweets....append would be for bottom
-   for(let card in cards) {
-    cardBoard.prepend(createCardElement(cards[cards]));
-   }
-  }
-
-//#2 1.a
-  function postCards(formDataStr){
-   $.ajax({
-    url: `/boardId`,
-    method: 'POST',
-    data: formDataStr,
-    success: function () {
-     $('#text-area').val('');
-      getTweets()
-              }
-   })
-  }
-
-  function escape(str) {
-  var div = document.createElement('div');
-  div.appendChild(document.createTextNode(str));
-  return div.innerHTML;
-  }
-//#3
-  function getTweets(){
-    $.ajax({
-      url: `/tweets`,
-      method: 'GET',
-      success: function (data) {
-        console.log(data)
-        renderTweets(data);
-      }
-    });
-  }
-*/
-
 
