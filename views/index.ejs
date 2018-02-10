@@ -48,7 +48,8 @@
 
       <% include ./partials/_login %>
       <% include ./partials/_register %>
-      <% include ./partials/_card %>
-
+      <% for (let card of mostLikedCards){ %>
+        <%- include('./partials/_card', {cardInfo: mostLikedCards[card]}) %>
+    <% } %>
   </body>
 </html>

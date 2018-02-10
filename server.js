@@ -62,7 +62,7 @@ app.get("/", (req, res) => {
     const templateVars = {isLoggedIn: DataHelpers.loggedIn(req.session)};
     DataHelpers.getMostLikedCards((err, mostLikedCards) => {
       templateVars.mostLikedCards = mostLikedCards;
-      console.log(mostLikedCards);
+      console.log('TVMLK', templateVars.mostLikedCards);
       res.render("index", templateVars);
     })
   }
