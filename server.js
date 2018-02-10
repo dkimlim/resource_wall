@@ -51,7 +51,7 @@ app.use("/api/users", usersRoutes(knex));
 // Home page
 app.get("/", (req, res) => {
  const isLoggedIn = {isLoggedIn: DataHelpers.loggedIn(req.session)}
- 
+
   res.status(200);
   if(isLoggedIn.isLoggedIn){
     DataHelpers.getUserBoards(req.session, (err, result) => {
@@ -59,7 +59,7 @@ app.get("/", (req, res) => {
       DataHelpers.getMostLikedCards((err, cards) => {
         templateVars.cards = cards;
         res.render("index", templateVars);
-      }) 
+      })
     })
   } else {
     const templateVars = {isLoggedIn: DataHelpers.loggedIn(req.session)};
@@ -156,7 +156,7 @@ app.post("/register", (req, res, err) => {
           req.session.userID=results[0];
           res.redirect('/')
         });
-        
+
       }
     },
     error => {
@@ -165,7 +165,7 @@ app.post("/register", (req, res, err) => {
   )
 });
 
-//If #tag entered in search bar exists, server returns an array of cards that have that tagid. 
+//If #tag entered in search bar exists, server returns an array of cards that have that tagid.
 //If it does not exist, an empty array is returned.
 app.post("/search", (req, res) => {
   DataHelpers.findCardsforTag(req.body.tagname);
@@ -187,6 +187,26 @@ app.get('/user-boards', (req, res) => {
   })
 })
 
+app.get('/user-boards/:board', (req, res) => {
+
+  let boardid = req.params["board"]
+
+  const templateVars = { };
+
+    DataHelpers.getCardsViaBoardId(boardid, (err, cards) => {
+      console.log("card collect by boardid ", cards)
+      templateVars.cards = cards
+      templateVars.isLoggedIn = DataHelpers.loggedIn(req.session);
+      console.log(templateVars);
+      DataHelpers.getUserBoards(req.session, (err, boards) => {
+      templateVars.userBoards = boards;
+
+      console.log ("temp vars", templateVars)
+
+      res.render('index', templateVars);
+    })
+  })
+})
 
 
 

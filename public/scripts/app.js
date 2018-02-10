@@ -10,7 +10,7 @@ $("#create-new-card-submit").on('click', function (event) {
   $('.card').remove();
   setTimeout(function() {
     window.location.replace("/user-boards")
-}, 2000); 
+}, 2000);
 })
 
   $("#register-button").click(function () {
@@ -142,6 +142,15 @@ $("#create-new-card-submit").on('click', function (event) {
     $card = $card.append(cardInfo);
     return $card;
   }
+   $('#view-board').on('click', function (event) {
+
+        let boardName = $('option:selected', this).text();
+        let boardID = $('option:selected', "#board-to-view").val();
+        (console.log(boardID))
+
+   window.location.replace(`/user-boards/${boardID}`)//("/boardid/cards");
+
+  })
 
   $('#show-my-cards').on('click', function (event) {
     $('.card').remove();
