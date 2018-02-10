@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <title>Profile Page</title>
@@ -7,8 +7,6 @@
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
     <link rel="stylesheet" href="/node_modules/css-star-rating/dist/css/star-rating.css">
-
-
 
     <!-- App CSS -->
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
@@ -32,39 +30,41 @@
     <!-- App JS -->
     <script type="text/javascript" src="/scripts/app.js"></script>
     <script type="text/javascript" src="/scripts/likes-counter.js"></script>
-
  </head>
 
   <body>
-
     <header>
         <% include ./partials/_nav-bar %>
         <% include ./partials/_create-card %>
     </header>
       <% include ./partials/_friends-side-bar %>
 
-    <form class="update-profile-form col-md-4" action="/profile" method="POST">
-
       <h2>Update your profile</h2>
         
         <div class="profile-container">
 
-          <label for="username"><b>Update your username </b></label>
-          <input class="col-md-12" type="text" placeholder="<%= username %>" name="username">
-          <button class="username-btn col-md-2" type="submit">Edit</button>
+          <form class="update-profile-form col-md-4" action="/profile" method="POST">
+            <label for="username"><b>Update your username </b></label>
+            <input class="col-md-12" type="text" placeholder="<%= username %>" name="username">
+            <button class="username-btn col-md-2" type="submit">Edit</button>
+          </form>
 
-          <p><label for="email"><b>Update your e-mail </b></label>
-          <input class="col-md-12" type="email" placeholder="<%= email %>" name="email">
-          <button class="email-btn col-md-2" type="submit">Edit</button>
+          <p>
+            <form class="update-profile-form col-md-4" action="/profile" method="POST">
+              <label for="email"><b>Update your e-mail </b></label>
+              <input class="col-md-12" type="email" placeholder="<%= email %>" name="email">
+              <button class="email-btn col-md-2" type="submit">Edit</button>
+            </form>
+          </p>
 
-          <p><label for="password"><b>Confirm your password to update</b></label>
-          <input class="col-md-12" type="password" name="password">
-          <button class="password-btn col-md-2" type="submit">Edit</button>
-           
+          <p>
+            <form class="update-profile-form col-md-4" action="/profile" method="POST">
+              <label for="password"><b>Confirm your password to update</b></label>
+              <input class="col-md-12" type="password" name="password">
+              <button class="password-btn col-md-2" type="submit">Edit</button>
+            </form>
+          </p> 
+
         </div>
-      
-    </form>
-
-
   </body>
 </html>

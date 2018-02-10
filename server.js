@@ -205,7 +205,6 @@ app.post('/like-card', (req, res) => {
   })
 })
 
-
 //GET profile page if user is logged in. They can update their profile from this page. 
 app.get("/profile", (req, res) => {
   let isLoggedIn = DataHelpers.loggedIn(req.session)
@@ -227,22 +226,16 @@ app.get("/profile", (req, res) => {
   }
 });
 
-
 //POST updated information in the profile page. This will automatically update info in db. 
 app.post("/profile", (req, res) => {
-  console.log('post update test')
   const userData = {
     username: req.body.username,
     email: req.body.email,
     password: req.body.password,
     userID: req.session.userID
   };
-  console.log(userData);
-  console.log(req.session);
-
   DataHelpers.updateProfileInfo(userData, (results) => {
     console.log(results);
-    
   })
   res.redirect('/')
 });
