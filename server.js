@@ -52,7 +52,7 @@ app.use("/api/users", usersRoutes(knex));
 app.get("/", (req, res) => {
  const isLoggedIn = {isLoggedIn: DataHelpers.loggedIn(req.session)}
   res.status(200);
-  if(isLoggedIn){
+  if(isLoggedIn.isLoggedIn){
     DataHelpers.getUserBoards(req.session, (err, result) => {
        const templateVars = {userBoards: result, isLoggedIn: DataHelpers.loggedIn(req.session)}
        console.log(templateVars.userBoards);
