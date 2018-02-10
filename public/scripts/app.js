@@ -76,7 +76,7 @@ $("#create-new-card-submit").on('click', function (event) {
     const boardID = $('option:selected', this).val();
     const boardName = $('option:selected', this).text();
     const newCardULR = $(this).find('#validationDefault02').val();
-    const newCardtags = $(this).find('#validationDefault03').val();
+    const newCardtags = $(this).find('#validationDefault09').val();
     console.log("newCardULR:", newCardULR, "boardID:", boardID, "newCardtags:", newCardtags, "cardTitle:", cardTitle, "boardName:", boardName)
     // ????  is the this all the above info????
     postCards($(this).serialize())
@@ -89,7 +89,8 @@ $("#create-new-card-submit").on('click', function (event) {
       method: 'POST',
       data: formDataStr,
       success: function () {
-        $(this).find('#validationDefault01').val(""); //clear  cardTitle
+        $(this).find('#validationDefault01').val("");
+        $(this).find('#validationDefault04').val(""); //clear  cardTitle
         //$('option:selected',this).val(); //no need to clear selected wheel
         $(this).find('#validationDefault02').val(""); //clear   newCardULR
         $(this).find('#validationDefault03').val(""); // clear  newCardtags
