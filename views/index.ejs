@@ -39,14 +39,16 @@
 
      <header>
         <% include ./partials/_nav-bar %>
+        <% if(isLoggedIn) { %>
         <% include ./partials/_create-card %>
+        <% } %>
       </header>
       <% include ./partials/_friends-side-bar %>
     <!-- Add flex box around where the pins are going to be stored -->
 
       <% include ./partials/_login %>
       <% include ./partials/_register %>
-       <% include ./partials/_card %>
+      <% include ./partials/_card %>
 
   </body>
 </html>
