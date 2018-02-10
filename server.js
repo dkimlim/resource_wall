@@ -161,7 +161,7 @@ app.post("/register", (req, res, err) => {
 
       }
     },
-    error => {
+    err => {
       res.status(500).send(error.error);
     }
   )
@@ -211,6 +211,41 @@ app.post('/like-card', (req, res) => {
     }
   })
 })
+
+//GET profile page if user is logged in. They can update their profile from this page. 
+app.get("/profile", (req, res) => {
+  let isLoggedIn = DataHelpers.loggedIn(req.session)
+ 
+  if(isLoggedIn){
+    DataHelpers.getProfileOfLoggedUser(req.session, (err, users) => {
+      let templateVars = {
+        username: users[0].username,
+        email: users[0].email,
+        password: users[0].password,
+        isLoggedIn: DataHelpers.loggedIn(req.session),
+        userBoards: DataHelpers.getUserBoards(req.session)
+      };
+        res.render("profile", templateVars);
+    })
+  } else {
+      console.log('user is not logged in');
+      res.redirect('login')
+  }
+});
+
+//POST updated information in the profile page. This will automatically update info in db. 
+app.post("/profile", (req, res) => {
+  const userData = {
+    username: req.body.username,
+    email: req.body.email,
+    password: req.body.password,
+    userID: req.session.userID
+  };
+  DataHelpers.updateProfileInfo(userData, (results) => {
+    console.log(results);
+  })
+  res.redirect('/')
+});
 
 app.get('/user-boards/:board', (req, res) => {
 
