@@ -57,6 +57,7 @@ app.get("/", (req, res) => {
     DataHelpers.getUserBoards(req.session, (err, result) => {
        const templateVars = {userBoards: result, isLoggedIn: DataHelpers.loggedIn(req.session)}
       DataHelpers.getMostLikedCards((err, cards) => {
+        console.log('thecards: ', cards);
         templateVars.cards = cards;
         res.render("index", templateVars);
       }) 
@@ -184,6 +185,23 @@ app.get('/user-boards', (req, res) => {
       console.log('RENDERING USERS BOARDS!!!', templateVars);
       res.render('index', templateVars);
     })
+  })
+})
+
+app.post('/like-card', (req, res) => {
+  //2 is the cardid we are trying to like
+  DataHelpers.likedCard(req.session, req.body.cardid, (err, canLike) => {
+    console.log(canLike);
+    if(canLike) {
+      //add like to database
+      DataHelpers.updateLikesTable(canLike,req.session, req.body.cardid, (err) => {
+        console.log(err);
+      })
+    } else {
+      DataHelpers.updateLikesTable(canLike,req.session, req.body.cardid, (err) => {
+        console.log(err);
+      })
+    }
   })
 })
 

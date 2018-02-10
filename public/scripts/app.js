@@ -148,4 +148,13 @@ $("#create-new-card-submit").on('click', function (event) {
     window.location.replace("/user-boards");
   })
 
+  $('.fa-heart').on('click', function(event) {
+    event.preventDefault();
+    let data = {cardid: $(this).data('cardid')}
+
+    $.post('/like-card', data, () => {
+      //have to re-render the card!
+    })
+    console.log('cliked like!')
+  })
 })
