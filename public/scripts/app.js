@@ -10,7 +10,7 @@ $("#create-new-card-submit").on('click', function (event) {
   $('.card').remove();
   setTimeout(function() {
     window.location.replace("/user-boards")
-}, 2000); 
+}, 2000);
 })
 
   $("#register-button").click(function () {
@@ -131,7 +131,7 @@ $("#create-new-card-submit").on('click', function (event) {
     let cardInfo = `
     <div class="card" style="width: 18rem;">
     <h5><a  class="card-title" href=${escape(cardObj.user.card.url)}>${escape(cardObj.user.card.title)}</a></h5>
-    <img class="card-img-top" src=${img} >
+    <img class="card-img-top" src='https://static.pexels.com/photos/20787/pexels-photo.jpg'>
     <div class="card-body">
     <p class="card-tags">${escape(cardObj.user.card.tags)}</p>
     </div>
@@ -145,10 +145,21 @@ $("#create-new-card-submit").on('click', function (event) {
     $card = $card.append(cardInfo);
     return $card;
   }
+   $('#view-board').on('click', function (event) {
+
+        let boardName = $('option:selected', this).text();
+        let boardID = $('option:selected', "#board-to-view").val();
+        (console.log(boardID))
+
+   window.location.replace(`/user-boards/${boardID}`)//("/boardid/cards");
+    event.preventDefault();
+
+  })
 
   $('#show-my-cards').on('click', function (event) {
     $('.card').remove();
     window.location.replace("/user-boards");
+
   })
 
   $('.fa-heart').on('click', function(event) {
