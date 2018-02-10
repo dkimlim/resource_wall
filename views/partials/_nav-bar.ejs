@@ -9,6 +9,21 @@
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
       </form>
         <% if (isLoggedIn) { %>
+
+            <div class="choose-board">
+              <label for="choose-board">Select a board to view</label>
+               <select id="board-to-view" class="custom-select" name='board-of-card'>
+              <!--    <option selected>Starter Board</option> -->
+                 <% for (board in userBoards){ %>
+
+                 <option  value="<%= userBoards[board].boardid %>">
+                <%= userBoards[board].name %></option>
+                 <% } %>
+
+               </select>
+              <button id="view-board" class="btn btn-sm align-middle btn-outline-secondary my-board-button" type="button">View</button>
+            </div>
+
           <button id="show-my-cards" class="btn btn-sm align-middle btn-outline-secondary my-board-button" type="button">MyBoards</button>
           <button class="btn btn-sm align-middle btn-outline-secondary following-button" type="button">Following</button>
           <button id="reveal-new-card" class="btn btn-sm align-middle btn-outline-secondary add-res-button" type="button">CreateCard</button>
