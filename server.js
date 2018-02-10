@@ -189,11 +189,9 @@ app.get('/user-boards', (req, res) => {
 
 app.get('/user-boards/:board', (req, res) => {
 
-  let boardid = req.params["board"]
-
   const templateVars = { };
 
-    DataHelpers.getCardsViaBoardId(boardid, (err, cards) => {
+    DataHelpers.getCardsViaBoardId(req.params["board"], (err, cards) => {
       console.log("card collect by boardid ", cards)
       templateVars.cards = cards
       templateVars.isLoggedIn = DataHelpers.loggedIn(req.session);
@@ -207,8 +205,6 @@ app.get('/user-boards/:board', (req, res) => {
     })
   })
 })
-
-
 
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
