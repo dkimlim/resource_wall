@@ -56,7 +56,7 @@ app.get("/", (req, res) => {
   if(isLoggedIn.isLoggedIn){
     DataHelpers.getUserBoards(req.session, (err, result) => {
        const templateVars = {userBoards: result, isLoggedIn: DataHelpers.loggedIn(req.session)}
-      DataHelpers.getUserCards(req.session, (err, cards) => {
+      DataHelpers.getMostLikedCards((err, cards) => {
         templateVars.cards = cards;
         res.render("index", templateVars);
       }) 
@@ -114,14 +114,17 @@ app.post("/logout", (req, res) => {
 //This  adds a new card to the card database and then returns all the cards present
 app.post("/cards", (req, res) => {
   let cardInfo = {
-    url: req.body["card-url"],
-    tags: req.body.tags,
-    boardID: req.body["board-id"]
+    title: req.body['title-of-card'],
+    url: req.body["url-of-card"],
+    tags: req.body['tags-of-card'],
+    boardid: req.body["board-of-card"]
   };
-  DataHelpers.addNewCard(cardInfo);
+  console.log(req.body);
+  DataHelpers.addNewCard(cardInfo, (err) => {
+    console.log('before redirect');
+    res.redirect(200, '/user-cards');
+  });
   //We will have to change this to get userSpecific cards
-  const allCards = DataHelpers.getAllCards(req.session);
-  res.send(200, allCards);
 });
 
 
@@ -165,7 +168,20 @@ app.post("/search", (req, res) => {
   res.send(200, foundCards);
 });
 
-
+app.get('/user-boards', (req, res) => {
+  console.log('in user boards')
+  const templateVars = { };
+  DataHelpers.getUserCards(req.session, (err, cards) => {
+    templateVars.cards = cards;
+    templateVars.isLoggedIn = DataHelpers.loggedIn(req.session);
+    console.log(templateVars);
+    DataHelpers.getUserBoards(req.session, (err, boards) => {
+      templateVars.userBoards = boards;
+      console.log('RENDERING USERS BOARDS!!!', templateVars);
+      res.render('index', templateVars);
+    })
+  })
+})
 
 
 
