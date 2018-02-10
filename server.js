@@ -59,7 +59,12 @@ app.get("/", (req, res) => {
         res.render("index", templateVars);
     })
   } else {
-    res.render("index", isLoggedIn);
+    const templateVars = {isLoggedIn: DataHelpers.loggedIn(req.session)};
+    DataHelpers.getMostLikedCards((err, mostLikedCards) => {
+      templateVars.mostLikedCards = mostLikedCards;
+      console.log(mostLikedCards);
+      res.render("index", templateVars);
+    })
   }
 });
 
