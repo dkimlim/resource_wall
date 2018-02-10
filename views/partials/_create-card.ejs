@@ -1,24 +1,24 @@
  <section id="create-card-section" class="new-card col-md-5" >
-  <form id="new-card">
+  <form id="new-card" action="/cards" method="POST">
         <div class="form-row">
             <div class="col-md-5 mb-3">
               <label for="validationDefault01">Card Title</label>
-              <input type="text" class="form-control" id="validationDefault01" placeholder="Enter a Title" required>
+              <input name='title-of-card' type="text" class="form-control" id="validationDefault01" placeholder="Enter a Title" required>
             </div>
           <div class="col-md-7 mb-3">
             <label for="validationDefault02">ULR to Resource</label>
-            <input type="url" class="form-control" id="validationDefault02" placeholder="https://"  required>
+            <input type="url" name='url-of-card' class="form-control" id="validationDefault02" placeholder="https://"  required>
           </div>
         </div>
         <div class="form-row">
           <div class="col-md-12 mb-3">
             <label for="validationDefault03">Tags</label>
-            <input type="text" class="form-control" id="validationDefault03" placeholder="#keyword #descriptor word" required>
+            <input type="text" name='tags-of-card' class="form-control" id="validationDefault03" placeholder="#keyword #descriptor word" required>
           </div>
         </div>
         <div class="choose-board">
           <label for="choose-board">Select a board to add your card to</label>
-            <select class="custom-select">
+            <select class="custom-select" name='board-of-card'>
               <!--    <option selected>Starter Board</option> -->
               <% for (board in userBoards){ %>
 
@@ -35,7 +35,7 @@
              <button   id="add-board-button" class="btn btn-outline-success my-2 my-sm-0" type="button">Add Board</button>
           </div>
        </div>
-      <button class="btn btn-primary" type="submit">Submit form</button>
+      <button id="create-new-card-submit"class="btn btn-primary" type="submit">Submit form</button>
   </form>
 
 </section

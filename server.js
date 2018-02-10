@@ -51,17 +51,24 @@ app.use("/api/users", usersRoutes(knex));
 // Home page
 app.get("/", (req, res) => {
  const isLoggedIn = {isLoggedIn: DataHelpers.loggedIn(req.session)}
+ 
   res.status(200);
-  if(isLoggedIn){
+  if(isLoggedIn.isLoggedIn){
     DataHelpers.getUserBoards(req.session, (err, result) => {
        const templateVars = {userBoards: result, isLoggedIn: DataHelpers.loggedIn(req.session)}
-       console.log(templateVars.userBoards);
+      DataHelpers.getMostLikedCards((err, cards) => {
+        console.log('thecards: ', cards);
+        templateVars.cards = cards;
         res.render("index", templateVars);
+      }) 
     })
   } else {
-       console.log("not logged in" + isLoggedIn)
-     res.render("index", isLoggedIn);
-
+    const templateVars = {isLoggedIn: DataHelpers.loggedIn(req.session)};
+    DataHelpers.getMostLikedCards((err, mostLikedCards) => {
+      templateVars.cards = mostLikedCards;
+      console.log('TVMLK', templateVars.mostLikedCards);
+      res.render("index", templateVars);
+    })
   }
 });
 
@@ -108,14 +115,17 @@ app.post("/logout", (req, res) => {
 //This  adds a new card to the card database and then returns all the cards present
 app.post("/cards", (req, res) => {
   let cardInfo = {
-    url: req.body["card-url"],
-    tags: req.body.tags,
-    boardID: req.body["board-id"]
+    title: req.body['title-of-card'],
+    url: req.body["url-of-card"],
+    tags: req.body['tags-of-card'],
+    boardid: req.body["board-of-card"]
   };
-  DataHelpers.addNewCard(cardInfo);
+  console.log(req.body);
+  DataHelpers.addNewCard(cardInfo, (err) => {
+    console.log('before redirect');
+    res.redirect(200, '/');
+  });
   //We will have to change this to get userSpecific cards
-  const allCards = DataHelpers.getAllCards(req.session);
-  res.send(200, allCards);
 });
 
 
@@ -142,8 +152,12 @@ app.post("/register", (req, res, err) => {
         console.error("problems");
         res.status(401).send();
       } else {
-        DataHelpers.insertNewUser(userData);
-        res.send();
+        DataHelpers.insertNewUser(userData, (err, results) => {
+          console.log(results[0]);
+          req.session.userID=results[0];
+          res.redirect('/')
+        });
+        
       }
     },
     error => {
@@ -159,7 +173,37 @@ app.post("/search", (req, res) => {
   res.send(200, foundCards);
 });
 
+app.get('/user-boards', (req, res) => {
+  console.log('in user boards')
+  const templateVars = { };
+  DataHelpers.getUserCards(req.session, (err, cards) => {
+    templateVars.cards = cards;
+    templateVars.isLoggedIn = DataHelpers.loggedIn(req.session);
+    console.log(templateVars);
+    DataHelpers.getUserBoards(req.session, (err, boards) => {
+      templateVars.userBoards = boards;
+      console.log('RENDERING USERS BOARDS!!!', templateVars);
+      res.render('index', templateVars);
+    })
+  })
+})
 
+app.post('/like-card', (req, res) => {
+  //2 is the cardid we are trying to like
+  DataHelpers.likedCard(req.session, req.body.cardid, (err, canLike) => {
+    console.log(canLike);
+    if(canLike) {
+      //add like to database
+      DataHelpers.updateLikesTable(canLike,req.session, req.body.cardid, (err) => {
+        console.log(err);
+      })
+    } else {
+      DataHelpers.updateLikesTable(canLike,req.session, req.body.cardid, (err) => {
+        console.log(err);
+      })
+    }
+  })
+})
 
 
 
