@@ -1,14 +1,14 @@
 <div class="card" style="width: 18rem;">
-  <h5><a  class="card-title" href="https://www.google.com"><%= cardInfo.cardid %></a></h5>
+  <h5><a  class="card-title" href="https://www.google.com"><%= cardInfo.title %></a></h5>
   <img class="card-img-top" src="..." alt="Card image cap">
   <div class="card-body">
 
     <p class="card-tags">#javascript #SQL #Left Join</p>
   </div>
-   <span class="user-name"> Saved by <b> Beyonce </b></span>
+   <span class="user-name"> Saved by <b><%= cardInfo.username %></b></span>
       <actions class="card-reaction">
         <i class="fa fa-heart" aria-hidden="true" type="submit"> </i>
-        <span class="likes-value"> 1 </span>
+        <span class="likes-value"><%= cardInfo.total_counts %> </span>
      </actions>
 
   <div class="comments">
@@ -21,7 +21,7 @@
      <section class="comment-container">
     <div class="indv-comment">
      <span class="commenter-name"><b> JAYZ </b>says...</span>
-     <p class="card-comment"> this is a great resource</p>
+     <p class="card-comment"> <%= cardInfo.comment %></p>
    </div>
   </div>
 </div>

@@ -56,12 +56,15 @@ app.get("/", (req, res) => {
   if(isLoggedIn.isLoggedIn){
     DataHelpers.getUserBoards(req.session, (err, result) => {
        const templateVars = {userBoards: result, isLoggedIn: DataHelpers.loggedIn(req.session)}
+      DataHelpers.getUserCards(req.session, (err, cards) => {
+        templateVars.cards = cards;
         res.render("index", templateVars);
+      }) 
     })
   } else {
     const templateVars = {isLoggedIn: DataHelpers.loggedIn(req.session)};
     DataHelpers.getMostLikedCards((err, mostLikedCards) => {
-      templateVars.mostLikedCards = mostLikedCards;
+      templateVars.cards = mostLikedCards;
       console.log('TVMLK', templateVars.mostLikedCards);
       res.render("index", templateVars);
     })
