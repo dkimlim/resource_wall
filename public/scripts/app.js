@@ -10,7 +10,7 @@ $("#create-new-card-submit").on('click', function (event) {
   $('.card').remove();
   setTimeout(function() {
     window.location.replace("/user-boards")
-}, 2000);
+}, 2000); 
 })
 
   $("#register-button").click(function () {

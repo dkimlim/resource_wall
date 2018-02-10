@@ -122,7 +122,7 @@ app.post("/cards", (req, res) => {
   console.log(req.body);
   DataHelpers.addNewCard(cardInfo, (err) => {
     console.log('before redirect');
-    res.redirect(200, '/user-cards');
+    res.redirect(200, '/');
   });
   //We will have to change this to get userSpecific cards
 });
@@ -151,8 +151,12 @@ app.post("/register", (req, res, err) => {
         console.error("problems");
         res.status(401).send();
       } else {
-        DataHelpers.insertNewUser(userData);
-        res.send();
+        DataHelpers.insertNewUser(userData, (err, results) => {
+          console.log(results[0]);
+          req.session.userID=results[0];
+          res.redirect('/')
+        });
+        
       }
     },
     error => {
