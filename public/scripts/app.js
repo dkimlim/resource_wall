@@ -36,6 +36,12 @@ $("#create-new-card-submit").on('click', function (event) {
     $("#"+cardid).slideToggle("slow");
   });
 
+  $("#profile-button").click(function () {
+    $.get("/profile", () => {
+      window.location.replace("/profile");
+    })
+  });
+
   $("#logout-button").on('click', function () {
     console.log("logout clicked")
     $.post("/logout", () => {
