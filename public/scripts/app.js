@@ -157,6 +157,19 @@ $("#create-new-card-submit").on('click', function (event) {
 
   })
 
+   $('#search-button').on('click', function (event) {
+       event.preventDefault();
+        //let searchText= $('#searchbar-word').text();
+      let searchWord = $('#tagname').val();
+
+
+     console.log("searchWord ", searchWord )
+    // console.log("searchWord ", searchText)
+   window.location.replace(`/user-boards/search/${searchWord}`);
+
+
+  })
+
   $('#show-my-cards').on('click', function (event) {
     $('.card').remove();
     window.location.replace("/user-boards");

@@ -169,11 +169,11 @@ app.post("/register", (req, res, err) => {
 
 //If #tag entered in search bar exists, server returns an array of cards that have that tagid.
 //If it does not exist, an empty array is returned.
-app.post("/search", (req, res) => {
+/*app.post("/search", (req, res) => {
   DataHelpers.findCardsforTag(req.body.tagname);
   res.send(200, foundCards);
 });
-
+*/
 app.get('/user-boards', (req, res) => {
   console.log('in user boards')
   const templateVars = { };
@@ -265,6 +265,30 @@ app.get('/user-boards/:board', (req, res) => {
     })
   })
 })
+
+
+app.get('/user-boards/search/:searchWord', (req, res) => {
+  console.log(" req PARSM searchword", req.params["searchWord"])
+
+  const templateVars = { };
+
+    DataHelpers. getCardsByTitleKeyword(req.params["searchWord"], (err, cards) => {
+      console.log("card collect by searchWord", cards)
+      templateVars.cards = cards
+      templateVars.isLoggedIn = DataHelpers.loggedIn(req.session);
+      console.log(templateVars);
+      DataHelpers.getUserBoards(req.session, (err, boards) => {
+      templateVars.userBoards = boards;
+
+     // console.log ("temp vars", templateVars)
+
+      res.render('index', templateVars);
+    })
+  })
+})
+
+
+
 
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);

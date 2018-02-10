@@ -4,9 +4,9 @@
   <a class="navbar-brand" href="#">ResWall</a>
   <div>
     <div>
-      <form class="form-inline my-2 my-lg-0 search-bar" action="/search" method="POST">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search" name="tagname">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      <form>
+        <input id="tagname" class="form-control mr-sm-2" type="text" placeholder="Search" name="tagname">
+        <button id="search-button" name="search-button" class="btn btn-outline-success my-2 my-sm-0" type="button">Search</button>
       </form>
         <% if (isLoggedIn) { %>
 
