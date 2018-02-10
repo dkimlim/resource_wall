@@ -134,7 +134,7 @@ $("#create-new-card-submit").on('click', function (event) {
     <h5><a  class="card-title" href=${escape(cardObj.user.card.url)}>${escape(cardObj.user.card.title)}</a></h5>
     <img class="card-img-top" src='https://static.pexels.com/photos/20787/pexels-photo.jpg'>
     <div class="card-body">
-    <p class="card-tags">${escape(cardObj.user.card.tags)}</p>
+    <p class="card-tags">${escape(cardObj.user.card.description)}</p>
     </div>
     <span class="user-name"> Saved by <b> ${cardObj.user.username}</b></span>
     <actions class="card-reaction">

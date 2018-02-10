@@ -61,7 +61,7 @@ app.get("/", (req, res) => {
           templateVars.cards = cardsWithComments;
           res.render("index", templateVars);
         })
-      }) 
+      })
     })
   } else {
     console.log('in else');
@@ -118,7 +118,7 @@ app.post("/cards", (req, res) => {
   let cardInfo = {
     title: req.body['title-of-card'],
     url: req.body["url-of-card"],
-    tags: req.body['tags-of-card'],
+    description: req.body['tags-of-card'],
     boardid: req.body["board-of-card"]
   };
   console.log(req.body);
@@ -212,10 +212,10 @@ app.post('/like-card', (req, res) => {
   })
 })
 
-//GET profile page if user is logged in. They can update their profile from this page. 
+//GET profile page if user is logged in. They can update their profile from this page.
 app.get("/profile", (req, res) => {
   let isLoggedIn = DataHelpers.loggedIn(req.session)
- 
+
   if(isLoggedIn){
     DataHelpers.getProfileOfLoggedUser(req.session, (err, users) => {
       let templateVars = {
@@ -233,7 +233,7 @@ app.get("/profile", (req, res) => {
   }
 });
 
-//POST updated information in the profile page. This will automatically update info in db. 
+//POST updated information in the profile page. This will automatically update info in db.
 app.post("/profile", (req, res) => {
   const userData = {
     username: req.body.username,
