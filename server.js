@@ -9,6 +9,7 @@ const bodyParser = require("body-parser");
 const sass = require("node-sass-middleware");
 const app = express();
 
+const bcrypt = require('bcrypt');
 const knexConfig = require("./knexfile");
 const knex = require("knex")(knexConfig[ENV]);
 const morgan = require('morgan');
@@ -218,14 +219,18 @@ app.get("/profile", (req, res) => {
  
   if(isLoggedIn){
     DataHelpers.getProfileOfLoggedUser(req.session, (err, users) => {
-      let templateVars = {
+      let templateVariables = {
         username: users[0].username,
         email: users[0].email,
         password: users[0].password,
         isLoggedIn: DataHelpers.loggedIn(req.session),
-        userBoards: DataHelpers.getUserBoards(req.session)
-      };
-        res.render("profile", templateVars);
+        userBoards: DataHelpers.getUserBoards(req.session, (err, result) => {
+          const templateVars = {userBoards: result, isLoggedIn: DataHelpers.loggedIn(req.session)}
+        })
+      }
+          
+        res.render("profile", templateVariables);
+
     })
   } else {
       console.log('user is not logged in');
@@ -235,17 +240,34 @@ app.get("/profile", (req, res) => {
 
 //POST updated information in the profile page. This will automatically update info in db. 
 app.post("/profile", (req, res) => {
-  const userData = {
-    username: req.body.username,
-    email: req.body.email,
-    password: req.body.password,
-    userID: req.session.userID
-  };
+  const userData = {};
+  
+     if(req.body.email) userData.email = req.body.email;
+     if(req.body.password) userData.password = bcrypt.hashSync(req.body.password, 10);
+     if(req.body.username) userData.username = req.body.username;
+     if(req.session.userID) userData.userid = req.session.userID;
+
+  
   DataHelpers.updateProfileInfo(userData, (results) => {
     console.log(results);
   })
+
+
   res.redirect('/')
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 app.get('/user-boards/:board', (req, res) => {
 
