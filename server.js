@@ -51,22 +51,21 @@ app.use("/api/users", usersRoutes(knex));
 // Home page
 app.get("/", (req, res) => {
  const isLoggedIn = {isLoggedIn: DataHelpers.loggedIn(req.session)}
- 
-  res.status(200);
   if(isLoggedIn.isLoggedIn){
     DataHelpers.getUserBoards(req.session, (err, result) => {
        const templateVars = {userBoards: result, isLoggedIn: DataHelpers.loggedIn(req.session)}
       DataHelpers.getMostLikedCards((err, cards) => {
-        console.log('thecards: ', cards);
-        templateVars.cards = cards;
-        res.render("index", templateVars);
+        DataHelpers.getCardsComments(cards, (err, cardsWithComments) => {
+          templateVars.cards = cardsWithComments;
+          res.render("index", templateVars);
+        })
       }) 
     })
   } else {
+    console.log('in else');
     const templateVars = {isLoggedIn: DataHelpers.loggedIn(req.session)};
     DataHelpers.getMostLikedCards((err, mostLikedCards) => {
       templateVars.cards = mostLikedCards;
-      console.log('TVMLK', templateVars.mostLikedCards);
       res.render("index", templateVars);
     })
   }
@@ -185,6 +184,12 @@ app.get('/user-boards', (req, res) => {
       console.log('RENDERING USERS BOARDS!!!', templateVars);
       res.render('index', templateVars);
     })
+  })
+}),
+app.post('/comments', (req, res) => {
+  console.log('in comments POST', req.session);
+  DataHelpers.addComment(req.body, req.session, (err, result) => {
+    res.send(200);
   })
 })
 

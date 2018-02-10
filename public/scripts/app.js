@@ -29,8 +29,11 @@ $("#create-new-card-submit").on('click', function (event) {
     $("#comment-box").slideToggle("slow");
   });
 
-  $("#comments-display").click(function () {
-    $(".comment-container").slideToggle("slow");
+  $(".comments-display").click(function () {
+     console.log('clicked comments display!');
+     let cardid = $(this).data('cardid');
+     console.log(cardid);
+    $("#"+cardid).slideToggle("slow");
   });
 
   $("#logout-button").on('click', function () {

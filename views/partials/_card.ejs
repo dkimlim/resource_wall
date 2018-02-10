@@ -15,14 +15,18 @@
     <button class="comment-box-open btn btn-outline-success my-2 my-sm-0" type="button">Add comment</button>
         <form class="commentbox" action="/comments" method="post" >
           <textarea class="text-area" name="text" placeholder=  "What do you think of this resource?"></textarea>
+          <input type="hidden" name="cardid" value="<%= cardInfo.cardid %>" />
           <input class="comment-submit" type="submit" value="Reply">
         </form>
-     <button class="comments-display btn btn-outline-success my-2 my-sm-0" type="button">Display Comments</button>
-     <section class="comment-container">
-    <div class="indv-comment">
-     <span class="commenter-name"><b> JAYZ </b>says...</span>
-     <p class="card-comment"> <%= cardInfo.comment %></p>
+     <button data-cardid="<%= cardInfo.cardid %>" class="comments-display btn btn-outline-success my-2 my-sm-0" type="button">Display Comments</button>
+     <section id="<%= cardInfo.cardid %>" class="comment-container">
+    <% for(let comment in cardInfo.comments) { %>
+      <div class="indv-comment">
+     <span class="commenter-name"><b> <%= cardInfo.comments[comment].username %> </b>says...</span>
+     <p class="card-comment"> <%= cardInfo.comments[comment].comment %></p>
    </div>
+   <% } %>
+   </section>
   </div>
 </div>
 
