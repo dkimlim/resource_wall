@@ -272,7 +272,7 @@ app.get('/user-boards/search/:searchWord', (req, res) => {
 
   const templateVars = { };
 
-    DataHelpers. getCardsByTitleKeyword(req.params["searchWord"], (err, cards) => {
+    DataHelpers. getCardsByKeyword(req.params["searchWord"], (err, cards) => {
       console.log("card collect by searchWord", cards)
       templateVars.cards = cards
       templateVars.isLoggedIn = DataHelpers.loggedIn(req.session);
