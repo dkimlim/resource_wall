@@ -1,6 +1,9 @@
 <div class="card" style="width: 18rem;">
 
+
   <img class="card-img-top" src="https://static.pexels.com/photos/20787/pexels-photo.jpg" alt="Card image cap">
+
+
 
   <div class="card-body">
 
@@ -17,7 +20,7 @@
   </h3>
   <actions class="card-reaction">
     <i data-cardid="<%= cardInfo.cardid %>" class="fa fa-heart btn btn-outline-success my-2 my-sm-0" aria-hidden="true" type="submit"> </i>
-    <span class="likes-value">
+    <span class="likes-value likes-cardid<%= cardInfo.cardid %>">
       <%= cardInfo.total_counts %>
     </span>
     <div id='rating-for<%= cardInfo.cardid %>' class="set-rating">

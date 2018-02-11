@@ -200,6 +200,7 @@ app.post('/comments', (req, res) => {
 
 app.post('/like-card', (req, res) => {
   //2 is the cardid we are trying to like
+
   DataHelpers.likedCard(req.session, req.body.cardid, (err, canLike) => {
     console.log(canLike);
     if(canLike) {
@@ -235,7 +236,7 @@ app.get("/profile", (req, res) => {
           const templateVars = {userBoards: result, isLoggedIn: DataHelpers.loggedIn(req.session)}
         })
       }
-          
+
         res.render("profile", templateVariables);
 
     })
@@ -248,13 +249,13 @@ app.get("/profile", (req, res) => {
 //POST updated information in the profile page. This will automatically update info in db.
 app.post("/profile", (req, res) => {
   const userData = {};
-  
+
      if(req.body.email) userData.email = req.body.email;
      if(req.body.password) userData.password = bcrypt.hashSync(req.body.password, 10);
      if(req.body.username) userData.username = req.body.username;
      if(req.session.userID) userData.userid = req.session.userID;
 
-  
+
   DataHelpers.updateProfileInfo(userData, (results) => {
     console.log(results);
   })

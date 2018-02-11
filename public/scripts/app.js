@@ -10,7 +10,7 @@ $("#create-new-card-submit").on('click', function (event) {
   $('.card').remove();
   setTimeout(function() {
     window.location.replace("/user-boards")
-}, 2000);
+}, 50);
 })
 
   $("#register-button").click(function () {
@@ -191,9 +191,9 @@ $("#create-new-card-submit").on('click', function (event) {
     $.post('/like-card', data, (res) => {
       console.log('likes value returned as json = ', res.total_likes);
       if(res.liked) {
-        $('.likes-value').text(res.total_likes);
+        $('.likes-cardid'+data.cardid).text(res.total_likes);
       } else {
-        $('.likes-value').text(res.total_likes);
+        $('.likes-cardid'+data.cardid).text(res.total_likes);
       }
     })
     console.log('cliked like!')
