@@ -25,7 +25,7 @@ $("#create-new-card-submit").on('click', function (event) {
     $("#create-card-section").slideToggle("slow");
   });
 
-  $("#comment-box-open").click(function () {
+  $("#comment-icon-button").click(function () {
     $("#comment-box").slideToggle("slow");
   });
 

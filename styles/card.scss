@@ -1,19 +1,82 @@
+
 .card {
   background-color: light green;
   position: relative;
   margin: 15px auto;
-  border: 1px solid grey;
-  border-radius: 0.5em;
+}
+
+.card-body {
+ display: block;
+ margin: 15px auto;
+ padding: 5px 15px 5px 15px;
+}
+
+#card-username {
+  display: block;
+  text-align: center;
+  margin: auto;
+  font-family: 'Helvetica', serif, ;
+  font-color: #B3B4B6;
+
+}
+
+.card-title {
+  display: block;
+  text-align: center;
+  margin: auto;
+  font-family: 'Lora', serif, ;
+  font-color: #1B284E;
+
+}
+.card-reaction {
+  display: inline;
+  margin: auto;
+  text-align: center;
+
+}
+
+.set-rating {
+  display: inline;
+  text-align: center;
+  margin: auto;
+  font-family: 'Helvetica', serif, ;
+  font-color: #B3B4B6;
+
+}
+
+#card-description {
+  display: block;
+  text-align: center;
+  margin: auto;
+  font-family: 'Helvetica', serif, ;
+  font-color: #B3B4B6;
+
+}
+
+.fa {
+ display: inline;
+  margin: auto;
+  text-align: center;
+  color: #B3B4B6;
+  border-color: white;
+
 }
 
 .commentbox {
   display: none;
+  margin: auto;
+
 }
 
 .comment-container {
+  display: block;
+  margin: auto;
   display: none;
 }
 
 .card .indv-comment {
+  display: block;
+  margin: auto;
   border-top: 1px solid #B6B7C1
 }
+
