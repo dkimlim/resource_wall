@@ -205,11 +205,16 @@ app.post('/like-card', (req, res) => {
     if(canLike) {
       //add like to database
       DataHelpers.updateLikesTable(canLike,req.session, req.body.cardid, (err) => {
-        console.log(err);
+        DataHelpers.getTotalLikes(req.body.cardid, (err, total_likes) => {
+          // console.log('total likes in server.js is', total_likes)
+          res.json({liked: canLike, total_likes: total_likes});
+        })
       })
     } else {
       DataHelpers.updateLikesTable(canLike,req.session, req.body.cardid, (err) => {
-        console.log(err);
+        DataHelpers.getTotalLikes(req.body.cardid, (err, total_likes) => {
+          res.json({liked: canLike, total_likes: total_likes});
+        })
       })
     }
   })
