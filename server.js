@@ -291,7 +291,6 @@ app.get('/user-boards/:board', (req, res) => {
   })
 })
 
-<<<<<<< HEAD
 app.post("/ratings", (req, res) => {
   console.log(req.body);
   req.body.userid = req.session.userID;
@@ -306,7 +305,6 @@ app.get("/get-rating", (req, res) => {
       res.json({cardRating: result});
     })
 })
-=======
 
 app.get('/user-boards/search/:searchWord', (req, res) => {
   console.log(" req PARSM searchword", req.params["searchWord"])
@@ -331,7 +329,6 @@ app.get('/user-boards/search/:searchWord', (req, res) => {
 
 
 
->>>>>>> 7fc001b67217e44caace951f4be827aaad48835d
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
 });
