@@ -184,7 +184,10 @@ app.get('/user-boards', (req, res) => {
     console.log(templateVars);
     DataHelpers.getUserBoards(req.session, (err, boards) => {
       templateVars.userBoards = boards;
-      console.log('RENDERING USERS BOARDS!!!', templateVars);
+      // DataHelpers.getUserLikedCards(req.session, (err, userLikedBoards) => {
+      //   //templateVars.userBoards.push(userLikedBoards);
+      // })
+      console.log('RENDERING USERS BOARDS!!!', boards);
       res.render('index', templateVars);
     })
   })
