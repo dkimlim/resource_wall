@@ -62,7 +62,7 @@ app.get("/", (req, res) => {
           templateVars.cards = cardsWithComments;
           res.render("index", templateVars);
         })
-      }) 
+      })
     })
   } else {
     console.log('in else');
@@ -119,7 +119,7 @@ app.post("/cards", (req, res) => {
   let cardInfo = {
     title: req.body['title-of-card'],
     url: req.body["url-of-card"],
-    tags: req.body['tags-of-card'],
+    description: req.body['tags-of-card'],
     boardid: req.body["board-of-card"]
   };
   console.log(req.body);
@@ -170,11 +170,11 @@ app.post("/register", (req, res, err) => {
 
 //If #tag entered in search bar exists, server returns an array of cards that have that tagid.
 //If it does not exist, an empty array is returned.
-app.post("/search", (req, res) => {
+/*app.post("/search", (req, res) => {
   DataHelpers.findCardsforTag(req.body.tagname);
   res.send(200, foundCards);
 });
-
+*/
 app.get('/user-boards', (req, res) => {
   console.log('in user boards')
   const templateVars = { };
@@ -216,10 +216,10 @@ app.post('/like-card', (req, res) => {
   })
 })
 
-//GET profile page if user is logged in. They can update their profile from this page. 
+//GET profile page if user is logged in. They can update their profile from this page.
 app.get("/profile", (req, res) => {
   let isLoggedIn = DataHelpers.loggedIn(req.session)
- 
+
   if(isLoggedIn){
     DataHelpers.getProfileOfLoggedUser(req.session, (err, users) => {
       let templateVariables = {
@@ -241,7 +241,7 @@ app.get("/profile", (req, res) => {
   }
 });
 
-//POST updated information in the profile page. This will automatically update info in db. 
+//POST updated information in the profile page. This will automatically update info in db.
 app.post("/profile", (req, res) => {
   const userData = {};
   
@@ -291,6 +291,7 @@ app.get('/user-boards/:board', (req, res) => {
   })
 })
 
+<<<<<<< HEAD
 app.post("/ratings", (req, res) => {
   console.log(req.body);
   req.body.userid = req.session.userID;
@@ -305,6 +306,32 @@ app.get("/get-rating", (req, res) => {
       res.json({cardRating: result});
     })
 })
+=======
+
+app.get('/user-boards/search/:searchWord', (req, res) => {
+  console.log(" req PARSM searchword", req.params["searchWord"])
+
+  const templateVars = { };
+
+    DataHelpers. getCardsByKeyword(req.params["searchWord"], (err, cards) => {
+      console.log("card collect by searchWord", cards)
+      templateVars.cards = cards
+      templateVars.isLoggedIn = DataHelpers.loggedIn(req.session);
+      console.log(templateVars);
+      DataHelpers.getUserBoards(req.session, (err, boards) => {
+      templateVars.userBoards = boards;
+
+     // console.log ("temp vars", templateVars)
+
+      res.render('index', templateVars);
+    })
+  })
+})
+
+
+
+
+>>>>>>> 7fc001b67217e44caace951f4be827aaad48835d
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
 });
