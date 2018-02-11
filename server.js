@@ -178,24 +178,23 @@ app.post("/register", (req, res, err) => {
 app.get('/user-boards', (req, res) => {
   console.log('in user boards')
   const templateVars = { };
-  DataHelpers.getUserCards(req.session, (err, cards) => {
+  DataHelpers.getMyCards(req.session, (err, cards) => {
+    console.log('RESULT OF GETMYCARDS = ', cards)
     templateVars.cards = cards;
     templateVars.isLoggedIn = DataHelpers.loggedIn(req.session);
-    console.log(templateVars);
-    DataHelpers.getUserBoards(req.session, (err, boards) => {
-      templateVars.userBoards = boards;
-      // DataHelpers.getUserLikedCards(req.session, (err, userLikedBoards) => {
-      //   //templateVars.userBoards.push(userLikedBoards);
-      // })
-      console.log('RENDERING USERS BOARDS!!!', boards);
-      res.render('index', templateVars);
+    DataHelpers.getCardsComments(cards, (err, cardsWithComments) => {
+      templateVars.cards = cardsWithComments;
+      DataHelpers.getUserBoards(req.session, (err, boards) => {
+        templateVars.userBoards = boards;
+        res.render('index', templateVars);
+      })
     })
   })
 }),
 app.post('/comments', (req, res) => {
   console.log('in comments POST', req.session);
-  DataHelpers.addComment(req.body, req.session, (err, result) => {
-    res.send(200);
+  DataHelpers.addComment(req.body, req.session, (err) => {
+    res.redirect('/');
   })
 })
 
@@ -294,9 +293,16 @@ app.get('/user-boards/:board', (req, res) => {
 app.post("/ratings", (req, res) => {
   console.log(req.body);
   req.body.userid = req.session.userID;
-  DataHelpers.addNewRating(req.body, (err) => {
-    res.send(200);
-  });
+  DataHelpers.canUserRate(req.session, req.body.cardid, (err, canRate) => {
+    console.log('CAN RATE = ', canRate)
+    if(canRate) {
+      DataHelpers.addNewRating(req.body, (err) => {
+        res.send(200);
+      });
+    } else {
+      res.send(200);
+    }
+  })
 })
 app.get("/get-rating", (req, res) => {
   console.log(req.query);

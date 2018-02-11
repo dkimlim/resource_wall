@@ -1,6 +1,6 @@
 <div class="card" style="width: 18rem;">
   <h5>
-    <a class="card-title" href="https://www.google.com">
+    <a class="card-title" href="<%= cardInfo.url %>">
       <%= cardInfo.title %>
     </a>
   </h5>
@@ -20,6 +20,7 @@
       <%= cardInfo.total_counts %>
     </span>
     <div id='rating-for<%= cardInfo.cardid %>' class="set-rating">
+      <!-- CHECK IF RATED -->
       <label id='label-for-rating<%= cardInfo.cardid %>'class='choose-rating' for="choose-rating">Rate</label>
       <select data-cardid='<%= cardInfo.cardid %>' class="card-rating" name='rating-of-card'>
         <option selected="selected">0</option>
