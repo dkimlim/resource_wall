@@ -1,5 +1,5 @@
 $(document).ready(function () {
-
+  //$("#input-id").rating();
   // $('#create-card-section').on('click', function (event) {
   console.log('RELOADSADASDADADASDASDADADA-page')
   // })
@@ -10,7 +10,7 @@ $("#create-new-card-submit").on('click', function (event) {
   $('.card').remove();
   setTimeout(function() {
     window.location.replace("/user-boards")
-}, 2000); 
+}, 2000);
 })
 
   $("#register-button").click(function () {
@@ -29,8 +29,17 @@ $("#create-new-card-submit").on('click', function (event) {
     $("#comment-box").slideToggle("slow");
   });
 
-  $("#comments-display").click(function () {
-    $(".comment-container").slideToggle("slow");
+  $(".comments-display").click(function () {
+     console.log('clicked comments display!');
+     let cardid = $(this).data('cardid');
+     console.log(cardid);
+    $("#"+cardid).slideToggle("slow");
+  });
+
+  $("#profile-button").click(function () {
+    $.get("/profile", () => {
+      window.location.replace("/profile");
+    })
   });
 
   $("#logout-button").on('click', function () {
@@ -73,7 +82,7 @@ $("#create-new-card-submit").on('click', function (event) {
     const boardID = $('option:selected', this).val();
     const boardName = $('option:selected', this).text();
     const newCardULR = $(this).find('#validationDefault02').val();
-    const newCardtags = $(this).find('#validationDefault03').val();
+    const newCardtags = $(this).find('#validationDefault09').val();
     console.log("newCardULR:", newCardULR, "boardID:", boardID, "newCardtags:", newCardtags, "cardTitle:", cardTitle, "boardName:", boardName)
     // ????  is the this all the above info????
     postCards($(this).serialize())
@@ -86,7 +95,8 @@ $("#create-new-card-submit").on('click', function (event) {
       method: 'POST',
       data: formDataStr,
       success: function () {
-        $(this).find('#validationDefault01').val(""); //clear  cardTitle
+        $(this).find('#validationDefault01').val("");
+        $(this).find('#validationDefault04').val(""); //clear  cardTitle
         //$('option:selected',this).val(); //no need to clear selected wheel
         $(this).find('#validationDefault02').val(""); //clear   newCardULR
         $(this).find('#validationDefault03').val(""); // clear  newCardtags
@@ -128,9 +138,9 @@ $("#create-new-card-submit").on('click', function (event) {
     let cardInfo = `
     <div class="card" style="width: 18rem;">
     <h5><a  class="card-title" href=${escape(cardObj.user.card.url)}>${escape(cardObj.user.card.title)}</a></h5>
-    <img class="card-img-top" src=${img} >
+    <img class="card-img-top" src='https://static.pexels.com/photos/20787/pexels-photo.jpg'>
     <div class="card-body">
-    <p class="card-tags">${escape(cardObj.user.card.tags)}</p>
+    <p class="card-tags">${escape(cardObj.user.card.description)}</p>
     </div>
     <span class="user-name"> Saved by <b> ${cardObj.user.username}</b></span>
     <actions class="card-reaction">
@@ -142,19 +152,65 @@ $("#create-new-card-submit").on('click', function (event) {
     $card = $card.append(cardInfo);
     return $card;
   }
+   $('#view-board').on('click', function (event) {
+
+        let boardName = $('option:selected', this).text();
+        let boardID = $('option:selected', "#board-to-view").val();
+        (console.log(boardID))
+
+   window.location.replace(`/user-boards/${boardID}`)//("/boardid/cards");
+    event.preventDefault();
+
+  })
+
+   $('#search-button').on('click', function (event) {
+       event.preventDefault();
+        //let searchText= $('#searchbar-word').text();
+      let searchWord = $('#tagname').val();
+
+
+     console.log("searchWord ", searchWord )
+    // console.log("searchWord ", searchText)
+   window.location.replace(`/user-boards/search/${searchWord}`);
+
+
+  })
 
   $('#show-my-cards').on('click', function (event) {
     $('.card').remove();
     window.location.replace("/user-boards");
+
   })
 
   $('.fa-heart').on('click', function(event) {
     event.preventDefault();
-    let data = {cardid: $(this).data('cardid')}
+    let data = {
+      cardid: $(this).data('cardid')
+  }
 
-    $.post('/like-card', data, () => {
-      //have to re-render the card!
+    $.post('/like-card', data, (res) => {
+      console.log('likes value returned as json = ', res.total_likes);
+      if(res.liked) {
+        $('.likes-value').text(res.total_likes);
+      } else {
+        $('.likes-value').text(res.total_likes);
+      }
     })
     console.log('cliked like!')
+  })
+
+  $(".card-rating").change(function () {
+    let cardInfo = {avgrating: $(this).val()};
+    cardInfo.cardid = $(this).data('cardid');
+    $(`#label-for${cardInfo.cardid}`).hide();
+   $.post('/ratings', cardInfo, () => {
+    $.get('/get-rating', cardInfo, (avgRating) => {
+        $(`#rating-for${cardInfo.cardid}`).text(avgRating.cardRating);
+      })
+     })
+  }),
+
+  $('.comment-box-open').on('click', function () {
+      $('.commentbox').slideToggle('slow');
   })
 })

@@ -1,29 +1,58 @@
 <div class="card" style="width: 18rem;">
-  <h5><a  class="card-title" href="https://www.google.com"><%= cardInfo.title %></a></h5>
-  <img class="card-img-top" src="..." alt="Card image cap">
+  <h5>
+    <a class="card-title" href="<%= cardInfo.url %>">
+      <%= cardInfo.title %>
+    </a>
+  </h5>
+  <img class="card-img-top" src="https://static.pexels.com/photos/20787/pexels-photo.jpg" alt="Card image cap">
   <div class="card-body">
 
-    <p class="card-tags">#javascript #SQL #Left Join</p>
+    <p class="card-tags"><%= cardInfo.description %></p>
   </div>
-   <span class="user-name"> Saved by <b><%= cardInfo.username %></b></span>
-      <actions class="card-reaction">
-        <i data-cardid="<%= cardInfo.cardid %>" class="fa fa-heart" aria-hidden="true" type="submit"> </i>
-        <span class="likes-value"><%= cardInfo.total_counts %> </span>
-     </actions>
+  <span class="user-name"> Saved by
+    <b>
+      <%= cardInfo.username %>
+    </b>
+  </span>
+  <actions class="card-reaction">
+    <i data-cardid="<%= cardInfo.cardid %>" class="fa fa-heart btn btn-outline-success my-2 my-sm-0" aria-hidden="true" type="submit"> </i>
+    <span class="likes-value">
+      <%= cardInfo.total_counts %>
+    </span>
+    <div id='rating-for<%= cardInfo.cardid %>' class="set-rating">
+      <!-- CHECK IF RATED -->
+      <label id='label-for-rating<%= cardInfo.cardid %>'class='choose-rating' for="choose-rating">Rate</label>
+      <select data-cardid='<%= cardInfo.cardid %>' class="card-rating" name='rating-of-card'>
+        <option selected="selected">0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+    </div>
+  </actions>
 
   <div class="comments">
     <button class="comment-box-open btn btn-outline-success my-2 my-sm-0" type="button">Add comment</button>
-        <form class="commentbox" action="/comments" method="post" >
-          <textarea class="text-area" name="text" placeholder=  "What do you think of this resource?"></textarea>
-          <input class="comment-submit" type="submit" value="Reply">
-        </form>
-     <button class="comments-display btn btn-outline-success my-2 my-sm-0" type="button">Display Comments</button>
-     <section class="comment-container">
-    <div class="indv-comment">
-     <span class="commenter-name"><b> JAYZ </b>says...</span>
-     <p class="card-comment"> <%= cardInfo.comment %></p>
-   </div>
+    <form class="commentbox" action="/comments" method="post">
+      <textarea class="text-area" name="text" placeholder="What do you think of this resource?"></textarea>
+      <input type="hidden" name="cardid" value="<%= cardInfo.cardid %>" />
+      <input class="comment-submit" type="submit" value="Reply">
+    </form>
+    <button data-cardid="<%= cardInfo.cardid %>" class="comments-display btn btn-outline-success my-2 my-sm-0" type="button">Display Comments</button>
+    <section id="<%= cardInfo.cardid %>" class="comment-container">
+      <% for(let comment in cardInfo.comments) { %>
+        <div class="indv-comment">
+          <span class="commenter-name">
+            <b>
+              <%= cardInfo.comments[comment].username %>
+            </b>says...</span>
+          <p class="card-comment">
+            <%= cardInfo.comments[comment].comment %>
+          </p>
+        </div>
+        <% } %>
+    </section>
   </div>
 </div>
-
-
