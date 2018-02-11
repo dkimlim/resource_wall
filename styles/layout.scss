@@ -1,6 +1,12 @@
 body {
+
   background-color: #EEE;
 
+
+main{
+ display: inline-flex;
+ flex-wrap: wrap;
+}
   h1 {
     color: #244751;
   }

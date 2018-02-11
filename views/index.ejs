@@ -46,6 +46,7 @@
         <% include ./partials/_create-card %>
         <% } %>
       </header>
+      <main>
       <% include ./partials/_friends-side-bar %>
     <!-- Add flex box around where the pins are going to be stored -->
 
@@ -54,5 +55,6 @@
       <% for (let card of cards){ %>
         <%- include('./partials/_card', {cardInfo: card}) %>
     <% } %>
+     </main>
   </body>
 </html>
