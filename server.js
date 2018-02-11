@@ -62,7 +62,7 @@ app.get("/", (req, res) => {
           templateVars.cards = cardsWithComments;
           res.render("index", templateVars);
         })
-      }) 
+      })
     })
   } else {
     console.log('in else');
@@ -119,7 +119,7 @@ app.post("/cards", (req, res) => {
   let cardInfo = {
     title: req.body['title-of-card'],
     url: req.body["url-of-card"],
-    tags: req.body['tags-of-card'],
+    description: req.body['tags-of-card'],
     boardid: req.body["board-of-card"]
   };
   console.log(req.body);
@@ -170,29 +170,31 @@ app.post("/register", (req, res, err) => {
 
 //If #tag entered in search bar exists, server returns an array of cards that have that tagid.
 //If it does not exist, an empty array is returned.
-app.post("/search", (req, res) => {
+/*app.post("/search", (req, res) => {
   DataHelpers.findCardsforTag(req.body.tagname);
   res.send(200, foundCards);
 });
-
+*/
 app.get('/user-boards', (req, res) => {
   console.log('in user boards')
   const templateVars = { };
-  DataHelpers.getUserCards(req.session, (err, cards) => {
+  DataHelpers.getMyCards(req.session, (err, cards) => {
+    console.log('RESULT OF GETMYCARDS = ', cards)
     templateVars.cards = cards;
     templateVars.isLoggedIn = DataHelpers.loggedIn(req.session);
-    console.log(templateVars);
-    DataHelpers.getUserBoards(req.session, (err, boards) => {
-      templateVars.userBoards = boards;
-      console.log('RENDERING USERS BOARDS!!!', templateVars);
-      res.render('index', templateVars);
+    DataHelpers.getCardsComments(cards, (err, cardsWithComments) => {
+      templateVars.cards = cardsWithComments;
+      DataHelpers.getUserBoards(req.session, (err, boards) => {
+        templateVars.userBoards = boards;
+        res.render('index', templateVars);
+      })
     })
   })
 }),
 app.post('/comments', (req, res) => {
   console.log('in comments POST', req.session);
-  DataHelpers.addComment(req.body, req.session, (err, result) => {
-    res.send(200);
+  DataHelpers.addComment(req.body, req.session, (err) => {
+    res.redirect('/');
   })
 })
 
@@ -213,10 +215,10 @@ app.post('/like-card', (req, res) => {
   })
 })
 
-//GET profile page if user is logged in. They can update their profile from this page. 
+//GET profile page if user is logged in. They can update their profile from this page.
 app.get("/profile", (req, res) => {
   let isLoggedIn = DataHelpers.loggedIn(req.session)
- 
+
   if(isLoggedIn){
     DataHelpers.getProfileOfLoggedUser(req.session, (err, users) => {
       let templateVariables = {
@@ -238,7 +240,7 @@ app.get("/profile", (req, res) => {
   }
 });
 
-//POST updated information in the profile page. This will automatically update info in db. 
+//POST updated information in the profile page. This will automatically update info in db.
 app.post("/profile", (req, res) => {
   const userData = {};
   
@@ -287,6 +289,51 @@ app.get('/user-boards/:board', (req, res) => {
     })
   })
 })
+
+app.post("/ratings", (req, res) => {
+  console.log(req.body);
+  req.body.userid = req.session.userID;
+  DataHelpers.canUserRate(req.session, req.body.cardid, (err, canRate) => {
+    console.log('CAN RATE = ', canRate)
+    if(canRate) {
+      DataHelpers.addNewRating(req.body, (err) => {
+        res.send(200);
+      });
+    } else {
+      res.send(200);
+    }
+  })
+})
+app.get("/get-rating", (req, res) => {
+  console.log(req.query);
+    DataHelpers.getCardRating(req.query.cardid, (err, result) => {
+      console.log(result);
+      res.json({cardRating: result});
+    })
+})
+
+app.get('/user-boards/search/:searchWord', (req, res) => {
+  console.log(" req PARSM searchword", req.params["searchWord"])
+
+  const templateVars = { };
+
+    DataHelpers. getCardsByKeyword(req.params["searchWord"], (err, cards) => {
+      console.log("card collect by searchWord", cards)
+      templateVars.cards = cards
+      templateVars.isLoggedIn = DataHelpers.loggedIn(req.session);
+      console.log(templateVars);
+      DataHelpers.getUserBoards(req.session, (err, boards) => {
+      templateVars.userBoards = boards;
+
+     // console.log ("temp vars", templateVars)
+
+      res.render('index', templateVars);
+    })
+  })
+})
+
+
+
 
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);

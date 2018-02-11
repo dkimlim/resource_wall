@@ -4,7 +4,10 @@ exports.seed = function(knex, Promise) {
         return Promise.all([
           knex('userlikes').insert({userid: 1, cardid: 1}),
           knex('userlikes').insert({userid: 2, cardid: 2}),
-          knex('userlikes').insert({userid: 3, cardid: 2})
+          knex('userlikes').insert({userid: 3, cardid: 2}),
+          knex('userlikes').insert({userid: 1, cardid: 2}),
+          knex('userlikes').insert({userid: 2, cardid: 3}),
+          knex('userlikes').insert({userid: 1, cardid: 3})
         ]);
       });
   };
