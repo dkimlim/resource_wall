@@ -1,5 +1,5 @@
 $(document).ready(function () {
-
+  //$("#input-id").rating();
   // $('#create-card-section').on('click', function (event) {
   console.log('RELOADSADASDADADASDASDADADA-page')
   // })
@@ -170,5 +170,21 @@ $("#create-new-card-submit").on('click', function (event) {
       //have to re-render the card!
     })
     console.log('cliked like!')
+  })
+
+  $(".card-rating").change(function () {
+    console.log('changed!', $(this).val());
+    let cardInfo = {avgrating: $(this).val()};
+    console.log($(this).data('cardid'));
+    cardInfo.cardid = $(this).data('cardid');
+    console.log(cardInfo);
+    $(`#label-for${cardInfo.cardid}`).hide();
+   $.post('/ratings', cardInfo, () => {
+     console.log("CARD INFO BEFORE SENDING IN GET", cardInfo)
+    $.get('/get-rating', cardInfo, (avgRating) => {
+      console.log('RETURN RATING IS ', avgRating)
+        $(`#rating-for${cardInfo.cardid}`).text(avgRating.cardRating);
+      })
+     })
   })
 })

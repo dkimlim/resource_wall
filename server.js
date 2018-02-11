@@ -266,6 +266,20 @@ app.get('/user-boards/:board', (req, res) => {
   })
 })
 
+app.post("/ratings", (req, res) => {
+  console.log(req.body);
+  req.body.userid = req.session.userID;
+  DataHelpers.addNewRating(req.body, (err) => {
+    res.send(200);
+  });
+})
+app.get("/get-rating", (req, res) => {
+  console.log(req.query);
+    DataHelpers.getCardRating(req.query.cardid, (err, result) => {
+      console.log(result);
+      res.json({cardRating: result});
+    })
+})
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
 });
