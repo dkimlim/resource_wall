@@ -1,38 +1,44 @@
-
+<head><script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script></head>
 
 <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
   <a class="navbar-brand" href="#">ResWall</a>
   <div>
-    <div>
-      <form class="form-inline my-2 my-lg-0 search-bar" action="/search" method="POST">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search" name="tagname">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    <div class="card-buttons">
+        <button id="show-my-cards" class="btn btn-sm align-middle btn-outline-secondary my-board-button" type="button">MyBoards</button>
+        <button id="reveal-new-card" class="btn btn-sm align-middle btn-outline-secondary add-res-button" type="button">CreateCard</button>
+    </div>
+
+      <% if (isLoggedIn) { %>
+
+        <div class="choose-board">
+          <label for="choose-board">Select a board to view</label>
+
+          <select id="board-to-view" class="custom-select" name='board-of-card'>
+          <!--    <option selected>Starter Board</option> -->
+          <% for (board in userBoards){ %>
+
+            <option  value="<%= userBoards[board].boardid %>"><%= userBoards[board].name %></option>
+          
+          <% } %>
+          </select>
+
+          <button id="view-board" class="btn btn-sm align-middle btn-outline-secondary my-board-button" type="button">View</button>
+        </div>
+
+    <div class="search-bar">
+      <form class="form-inline my-2 my-lg-0" action="/search" method="POST">
+        <input class="search-form mr-sm-2" type="text" placeholder="Search" name="tagname">
+        <button class="search-btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
       </form>
-        <% if (isLoggedIn) { %>
+    </div>
 
-            <div class="choose-board">
-              <label for="choose-board">Select a board to view</label>
-               <select id="board-to-view" class="custom-select" name='board-of-card'>
-              <!--    <option selected>Starter Board</option> -->
-                 <% for (board in userBoards){ %>
-
-                 <option  value="<%= userBoards[board].boardid %>">
-                <%= userBoards[board].name %></option>
-                 <% } %>
-
-               </select>
-              <button id="view-board" class="btn btn-sm align-middle btn-outline-secondary my-board-button" type="button">View</button>
-            </div>
-
-          <button id="show-my-cards" class="btn btn-sm align-middle btn-outline-secondary my-board-button" type="button">MyBoards</button>
-          <button class="btn btn-sm align-middle btn-outline-secondary following-button" type="button">Following</button>
-          <button id="reveal-new-card" class="btn btn-sm align-middle btn-outline-secondary add-res-button" type="button">CreateCard</button>
-          <button id="profile-button" class="btn btn-sm align-middle btn-outline-secondary" type="button">Edit Profile</button>
-          <button id="logout-button" class="btn btn-sm align-middle btn-outline-secondary" type="button">Logout</button>
-        <% } else { %>
-          <button id="login-button" class="btn btn-outline-success login-button" type="button">Login</button>
-          <button id="register-button" class="btn btn-sm align-middle btn-outline-secondary reg-button" type="button">Register</button>
-        <% } %>
+        <div class="profile-buttons">
+        <button id="profile-button" class="btn btn-sm align-middle btn-outline-secondary" type="button">Edit Profile</button>
+        <button id="logout-button" class="btn btn-sm align-middle btn-outline-secondary" type="button">Logout</button>
+      <% } else { %>
+        <button id="login-button" class="btn btn-outline-success login-button" type="button">Login</button>
+        <button id="register-button" class="btn btn-sm align-middle btn-outline-secondary reg-button" type="button">Register</button>
+      <% } %>
 
     </div>
   </div>
