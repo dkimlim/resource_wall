@@ -25,15 +25,13 @@ $("#create-new-card-submit").on('click', function (event) {
     $("#create-card-section").slideToggle("slow");
   });
 
-  $("#comment-icon-button").click(function () {
-    $("#comment-box").slideToggle("slow");
-  });
+
 
   $(".comments-display").click(function () {
      console.log('clicked comments display!');
      let cardid = $(this).data('cardid');
      console.log(cardid);
-    $("#"+cardid).slideToggle("slow");
+    $("#cardcomment"+cardid).slideToggle("slow");
   });
 
   $("#profile-button").click(function () {
@@ -211,6 +209,11 @@ $("#create-new-card-submit").on('click', function (event) {
   }),
 
   $('.comment-box-open').on('click', function () {
-      $('.commentbox').slideToggle('slow');
+    console.log('clicked')
+     let data = {
+      cardid: $(this).data('cardid')
+  }
+
+      $('.cardid'+data.cardid).slideToggle('slow');
   })
 })
