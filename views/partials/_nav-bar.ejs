@@ -21,7 +21,7 @@
         <% for (board in userBoards){ %>
 
             <option value="<%= userBoards[board].boardid %>"><%= userBoards[board].name %></option>
-          
+
         <% } %>
           </select>
 
@@ -30,17 +30,17 @@
 
         <div class="search-bar">
           <form class="form-inline my-2 my-lg-0" action="/search" method="POST">
-            <input class="search-form mr-sm-2" type="text" placeholder="Search" name="tagname">
-            <button class="search-btn my-2 my-sm-0 btn-outline-secondary" type="submit"><i class="fa fa-search"></i></button>
+            <input   id="tagname"  class="search-form mr-sm-2" type="text" placeholder="Search" name="tagname">
+            <button id="search-button"   class="search-btn my-2 my-sm-0 btn-outline-secondary" type="submit"><i class="fa fa-search"></i></button>
           </form>
-        </div>
+
 
         <div class="profile-buttons">
         <button id="profile-button" class="btn btn-sm align-middle btn-outline-secondary" type="button"><i class="fa fa-user-o fa-2x"></i></button>
         <button id="logout-button" class="btn btn-sm align-middle btn-outline-secondary" type="button">Logout</button>
     <% } else { %>
 
-      
+
         <button id="register-button" class="btn btn-sm align-middle btn-outline-secondary reg-button" type="button">Register</button>
         <button id="login-button" class="btn btn-sm align-middle btn-outline-secondary login-button" type="button">Login</button>
     <% } %>
