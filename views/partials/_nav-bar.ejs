@@ -5,44 +5,45 @@
   <div>
 
 
+    <% if (isLoggedIn) { %>
 
-    <div class="card-buttons">
+        <div class="card-buttons">
+            <button id="reveal-new-card" class="btn btn-sm align-middle btn-outline-secondary add-res-button" type="button"><i class="fa fa-plus-square-o fa-lg"></i> Card</button>
+            <button id="show-my-cards" class="btn btn-sm align-middle btn-outline-secondary my-board-button" type="button">My Cards</button>
+        </div>
 
-        <button id="reveal-new-card" class="btn btn-sm align-middle btn-outline-secondary add-res-button" type="button"><i class="fa fa-plus-square-o fa-lg"></i> Card</button>
-        <button id="show-my-cards" class="btn btn-sm align-middle btn-outline-secondary my-board-button" type="button">My Cards</button>
-    </div>
-
-      <% if (isLoggedIn) { %>
 
         <div class="choose-board">
           <label for="choose-board">My Boards:</label>
 
           <select id="board-to-view" class="custom-select form-control" name='board-of-card'>
           <!--    <option selected>Starter Board</option> -->
-          <% for (board in userBoards){ %>
+        <% for (board in userBoards){ %>
 
             <option value="<%= userBoards[board].boardid %>"><%= userBoards[board].name %></option>
           
-          <% } %>
+        <% } %>
           </select>
 
           <button id="view-board" class="view-btn btn-sm align-middle btn-outline-secondary my-board-button" type="button">View</button>
         </div>
 
-    <div class="search-bar">
-      <form class="form-inline my-2 my-lg-0" action="/search" method="POST">
-        <input class="search-form mr-sm-2" type="text" placeholder="Search" name="tagname">
-        <button class="search-btn my-2 my-sm-0 btn-outline-secondary" type="submit"><i class="fa fa-search"></i></button>
-      </form>
-    </div>
+        <div class="search-bar">
+          <form class="form-inline my-2 my-lg-0" action="/search" method="POST">
+            <input class="search-form mr-sm-2" type="text" placeholder="Search" name="tagname">
+            <button class="search-btn my-2 my-sm-0 btn-outline-secondary" type="submit"><i class="fa fa-search"></i></button>
+          </form>
+        </div>
 
         <div class="profile-buttons">
         <button id="profile-button" class="btn btn-sm align-middle btn-outline-secondary" type="button"><i class="fa fa-user-o fa-2x"></i></button>
         <button id="logout-button" class="btn btn-sm align-middle btn-outline-secondary" type="button">Logout</button>
-      <% } else { %>
-        <button id="login-button" class="btn btn-outline-success login-button" type="button">Login</button>
+    <% } else { %>
+
+      
         <button id="register-button" class="btn btn-sm align-middle btn-outline-secondary reg-button" type="button">Register</button>
-      <% } %>
+        <button id="login-button" class="btn btn-sm align-middle btn-outline-secondary login-button" type="button">Login</button>
+    <% } %>
 
     </div>
   </div>
