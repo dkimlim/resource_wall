@@ -26,12 +26,11 @@ $("#create-new-card-submit").on('click', function (event) {
   });
 
 
-
   $(".comments-display").click(function () {
      console.log('clicked comments display!');
      let cardid = $(this).data('cardid');
      console.log(cardid);
-    $("#cardcomment"+cardid).slideToggle("slow");
+    $("comment-container").slideToggle("slow");
   });
 
   $("#profile-button").click(function () {
