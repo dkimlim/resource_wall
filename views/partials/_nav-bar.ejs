@@ -5,6 +5,7 @@
   <div>
 
 
+      <% if (isLoggedIn) { %>
 
     <div class="card-buttons">
 
@@ -12,7 +13,6 @@
         <button id="show-my-cards" class="btn btn-sm align-middle btn-outline-secondary my-board-button" type="button">My Cards</button>
     </div>
 
-      <% if (isLoggedIn) { %>
 
         <div class="choose-board">
           <label for="choose-board">My Boards:</label>
@@ -40,8 +40,10 @@
         <button id="profile-button" class="btn btn-sm align-middle btn-outline-secondary" type="button"><i class="fa fa-user-o fa-2x"></i></button>
         <button id="logout-button" class="btn btn-sm align-middle btn-outline-secondary" type="button">Logout</button>
       <% } else { %>
-        <button id="login-button" class="btn btn-outline-success login-button" type="button">Login</button>
+
+      
         <button id="register-button" class="btn btn-sm align-middle btn-outline-secondary reg-button" type="button">Register</button>
+        <button id="login-button" class="btn btn-sm align-middle btn-outline-secondary login-button" type="button">Login</button>
       <% } %>
 
     </div>

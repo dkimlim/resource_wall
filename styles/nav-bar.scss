@@ -11,7 +11,7 @@
   diplay: flex;
 }
 
-.login-button, .reg-button, .view-btn, .search-btn, .my-board-button {
+.view-btn, .search-btn, .my-board-button {
     display: inline-block;
     color: white;
     border-color: #808080;
@@ -24,24 +24,24 @@
 	display: inline-block;
 }
 
-#reveal-new-card, #profile-button, #logout-button, #login-button, #register-button {
+#reveal-new-card, #profile-button, #logout-button {
 	color: white;
-    border-color: #808080;
-}
-
-#profile-button, #logout-button, #login-button, #register-button {
+  border-color: #808080;
 	padding: 10px;
 }
 
-#reveal-new-card {
-	padding: 10px;
+
+
+#login-button, #register-button {
+  color: white;
+  border-color: #808080;
+  padding: 10px;
 }
 
 #show-my-cards {
 	width: 80px;
 	margin-left: 0;
 }
-
 
 .choose-board {
 	font-size: 14px;
