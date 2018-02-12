@@ -21,7 +21,7 @@
         <% for (board in userBoards){ %>
 
             <option value="<%= userBoards[board].boardid %>"><%= userBoards[board].name %></option>
-          
+
         <% } %>
           </select>
 
@@ -40,7 +40,7 @@
         <button id="logout-button" class="btn btn-sm align-middle btn-outline-secondary" type="button">Logout</button>
     <% } else { %>
 
-      
+
         <button id="register-button" class="btn btn-sm align-middle btn-outline-secondary reg-button" type="button">Register</button>
         <button id="login-button" class="btn btn-sm align-middle btn-outline-secondary login-button" type="button">Login</button>
     <% } %>
