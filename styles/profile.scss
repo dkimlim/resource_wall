@@ -1,6 +1,8 @@
 body {
-  background-color: #808080;
-  margin-top: 100px;
+  padding-top: 120px;
+background: blue;
+background: linear-gradient(to bottom right,#74BABD, #ABE9EC);
+padding-bottom: 200px;
 }
 
 h2 {
@@ -17,17 +19,26 @@ h2 {
   height: 100%;
   width: 100%;
   padding: 0 25%;
+  border-radius: 20px;
+  background: linear-gradient(to bottom right,#74BABD, #ABE9EC);
+  /*border: 3px solid #f1f1f1;*/
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .username-btn, .email-btn, .password-btn {
   display: inline-block;
   color: white;
-  background-color: #808080;
+  background: linear-gradient(to bottom right,#74BABD, #ABE9EC);
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.2), 0 6px 5px 0 rgba(0, 0, 0, 0.19);
   width: 50px;
   height: 35px;
   border-radius: 100px;
   border-color: white;
   margin-left: 0;
+}
+
+.username-btn:hover, .email-btn:hover, .password-btn:hover {
+  border-color: #74BABD;
 }
 
 .update-username, .update-email, .update-password {
@@ -36,7 +47,6 @@ h2 {
   /*height: 100px;*/
   border-radius: 20px;
   color: white;
-  background-color: #808080;
   padding-left: 10px;
   z-index: 100;
 }
