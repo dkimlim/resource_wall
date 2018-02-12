@@ -184,10 +184,17 @@ $("#create-new-card-submit").on('click', function (event) {
 
   $('.fa-heart').on('click', function(event) {
     event.preventDefault();
-    let data = {cardid: $(this).data('cardid')}
+    let data = {
+      cardid: $(this).data('cardid')
+  }
 
-    $.post('/like-card', data, () => {
-      //have to re-render the card!
+    $.post('/like-card', data, (res) => {
+      console.log('likes value returned as json = ', res.total_likes);
+      if(res.liked) {
+        $('.likes-cardid'+data.cardid).text(res.total_likes);
+      } else {
+        $('.likes-cardid'+data.cardid).text(res.total_likes);
+      }
     })
     console.log('cliked like!')
   })

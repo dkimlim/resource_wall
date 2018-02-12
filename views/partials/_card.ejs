@@ -4,7 +4,7 @@
       <%= cardInfo.title %>
     </a>
   </h5>
-  <img class="card-img-top" src="https://static.pexels.com/photos/20787/pexels-photo.jpg" alt="Card image cap">
+  <img class="card-img-top" src="./google.png" alt="Card image cap">
   <div class="card-body">
 
     <p class="card-tags"><%= cardInfo.description %></p>
@@ -15,8 +15,8 @@
     </b>
   </span>
   <actions class="card-reaction">
-    <i data-cardid="<%= cardInfo.cardid %>" class="fa fa-heart" aria-hidden="true" type="submit"> </i>
-    <span class="likes-value">
+    <i data-cardid="<%= cardInfo.cardid %>" class="fa fa-heart btn btn-outline-success my-2 my-sm-0" aria-hidden="true" type="submit"> </i>
+    <span class="likes-value likes-cardid<%= cardInfo.cardid %>">
       <%= cardInfo.total_counts %>
     </span>
     <div id='rating-for<%= cardInfo.cardid %>' class="set-rating">
