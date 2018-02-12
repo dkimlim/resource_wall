@@ -202,7 +202,7 @@ app.post('/comments', (req, res) => {
 
 app.post('/like-card', (req, res) => {
   //2 is the cardid we are trying to like
-  DataHelpers.getScreenShot();
+
   DataHelpers.likedCard(req.session, req.body.cardid, (err, canLike) => {
     console.log(canLike);
     if(canLike) {
@@ -238,7 +238,7 @@ app.get("/profile", (req, res) => {
           const templateVars = {userBoards: result, isLoggedIn: DataHelpers.loggedIn(req.session)}
         })
       }
-          
+
         res.render("profile", templateVariables);
 
     })
@@ -266,18 +266,6 @@ app.post("/profile", (req, res) => {
   })
   res.redirect('/')
 });
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 app.get('/user-boards/:board', (req, res) => {

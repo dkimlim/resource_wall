@@ -3,11 +3,13 @@
   <head>
     <title>Home Page</title>
     <script src="https://use.fontawesome.com/89163c727c.js"></script>
+
     <!-- External CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css" />
+     <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet">
     <!-- <link rel="stylesheet" href="/node_modules/css-star-rating/dist/css/star-rating.css"> -->
 
 
@@ -44,6 +46,7 @@
         <% include ./partials/_create-card %>
         <% } %>
       </header>
+      <main>
       <% include ./partials/_friends-side-bar %>
     <!-- Add flex box around where the pins are going to be stored -->
 
@@ -52,5 +55,6 @@
       <% for (let card of cards){ %>
         <%- include('./partials/_card', {cardInfo: card}) %>
     <% } %>
+     </main>
   </body>
 </html>

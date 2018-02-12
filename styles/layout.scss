@@ -1,5 +1,15 @@
 body {
+
   background-color: #808080;
   margin-top: 100px;
+
+main{
+ display: flex;
+ flex-wrap: wrap;
+ align-content: flex-start;
+}
+  h1 {
+    color: #244751;
+  }
 
 }

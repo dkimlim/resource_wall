@@ -17,7 +17,7 @@
           </div>
         </div>
         <div class="choose-board">
-          <label for="choose-board">Select a board to add your card to</label>
+          <label for="choose-board">Select a category to add your card to</label>
             <select class="custom-select" name='board-of-card'>
               <!--    <option selected>Starter Board</option> -->
               <% for (board in userBoards){ %>
@@ -30,12 +30,12 @@
         </div>
         <div class="form-row">
           <div class="col-md-6 mb-3">
-            <label for="validationDefault03">...or create a new board</label>
-            <input id="new-board" type="text" class="form-control" id="validationDefault03" placeholder="new board name">
-             <button   id="add-board-button" class="btn btn-outline-success my-2 my-sm-0" type="button">Add Board</button>
+            <label for="validationDefault03">...or create a new category</label>
+            <input id="new-board" type="text" class="form-control" id="validationDefault03" placeholder="new category name">
+             <button   id="add-board-button" class="btn btn-sm align-middle btn-outline-secondary" type="button">+Category</button>
           </div>
        </div>
-      <button id="create-new-card-submit"class="btn btn-primary" type="submit">Submit form</button>
+      <button id="create-new-card-submit"class="btn btn-primary" type="submit">Submit</button>
   </form>
 
 </section
