@@ -130,8 +130,6 @@ app.post("/cards", (req, res) => {
   //We will have to change this to get userSpecific cards
 });
 
-
-
 app.post("/boards", (req, res) => {
   let boardInfo = {
     name: req.body["boardname"],
@@ -148,24 +146,28 @@ app.post("/register", (req, res, err) => {
     password: req.body.password
   };
 
-  DataHelpers.isUserAlreadyExist(userData, (isExist) => {
-      if (isExist) {
-        //If this exists, then user information is not unique in db.
-        console.error("problems");
-        res.status(401).send();
-      } else {
-        DataHelpers.insertNewUser(userData, (err, results) => {
-          console.log(results[0]);
-          req.session.userID=results[0];
-          res.redirect('/')
-        });
+  if(req.body.username.indexOf(' ') >= 0){
+    res.redirect('/')
+  } else {
+    DataHelpers.isUserAlreadyExist(userData, (isExist) => {
+        if (isExist) {
+          //If this exists, then user information is not unique in db.
+          console.error("problems");
+          res.status(401).send();
+        } else {
+          DataHelpers.insertNewUser(userData, (err, results) => {
+            console.log(results[0]);
+            req.session.userID=results[0];
+            res.redirect('/')
+          });
 
+        }
+      },
+      err => {
+        res.status(500).send(error.error);
       }
-    },
-    err => {
-      res.status(500).send(error.error);
-    }
-  )
+    )
+  }
 });
 
 //If #tag entered in search bar exists, server returns an array of cards that have that tagid.
@@ -249,18 +251,19 @@ app.get("/profile", (req, res) => {
 //POST updated information in the profile page. This will automatically update info in db.
 app.post("/profile", (req, res) => {
   const userData = {};
-  
-     if(req.body.email) userData.email = req.body.email;
-     if(req.body.password) userData.password = bcrypt.hashSync(req.body.password, 10);
-     if(req.body.username) userData.username = req.body.username;
-     if(req.session.userID) userData.userid = req.session.userID;
 
-  
+  //username cannot have spaces. Will return an error. 
+  if(req.body.username.indexOf(' ') >= 0){
+      res.redirect('profile')
+  } else {
+      if(req.body.email) userData.email = req.body.email;
+      if(req.body.password) userData.password = bcrypt.hashSync(req.body.password, 10);
+      if(req.session.userID) userData.userid = req.session.userID;
+      if(req.body.username) userData.username = req.body.username;
+  } 
   DataHelpers.updateProfileInfo(userData, (results) => {
-    console.log(results);
+      console.log(results);
   })
-
-
   res.redirect('/')
 });
 

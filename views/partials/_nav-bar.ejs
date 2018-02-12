@@ -1,44 +1,49 @@
-<head><script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script></head>
+
 
 <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
-  <a class="navbar-brand" href="#">ResWall</a>
+  <div><i class="fa fa-circle-o-notch fa-spin fa-3x" style="color:White"></i></div>
   <div>
 
-    <div class="card-buttons">
-        <button id="show-my-cards" class="btn btn-sm align-middle btn-outline-secondary my-board-button" type="button">MyBoards</button>
-        <button id="reveal-new-card" class="btn btn-sm align-middle btn-outline-secondary add-res-button" type="button">CreateCard</button>
-    </div>
 
       <% if (isLoggedIn) { %>
 
-        <div class="choose-board">
-          <label for="choose-board">Select a board to view</label>
+    <div class="card-buttons">
 
-          <select id="board-to-view" class="custom-select" name='board-of-card'>
+        <button id="reveal-new-card" class="btn btn-sm align-middle btn-outline-secondary add-res-button" type="button"><i class="fa fa-plus-square-o fa-lg"></i> Card</button>
+        <button id="show-my-cards" class="btn btn-sm align-middle btn-outline-secondary my-board-button" type="button">My Cards</button>
+    </div>
+
+
+        <div class="choose-board">
+          <label for="choose-board">My Boards:</label>
+
+          <select id="board-to-view" class="custom-select form-control" name='board-of-card'>
           <!--    <option selected>Starter Board</option> -->
           <% for (board in userBoards){ %>
 
-            <option  value="<%= userBoards[board].boardid %>"><%= userBoards[board].name %></option>
+            <option value="<%= userBoards[board].boardid %>"><%= userBoards[board].name %></option>
           
           <% } %>
           </select>
 
-          <button id="view-board" class="btn btn-sm align-middle btn-outline-secondary my-board-button" type="button">View</button>
+          <button id="view-board" class="view-btn btn-sm align-middle btn-outline-secondary my-board-button" type="button">View</button>
         </div>
 
     <div class="search-bar">
       <form class="form-inline my-2 my-lg-0" action="/search" method="POST">
         <input class="search-form mr-sm-2" type="text" placeholder="Search" name="tagname">
-        <button class="search-btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
+        <button class="search-btn my-2 my-sm-0 btn-outline-secondary" type="submit"><i class="fa fa-search"></i></button>
       </form>
     </div>
 
         <div class="profile-buttons">
-        <button id="profile-button" class="btn btn-sm align-middle btn-outline-secondary" type="button">Edit Profile</button>
+        <button id="profile-button" class="btn btn-sm align-middle btn-outline-secondary" type="button"><i class="fa fa-user-o fa-2x"></i></button>
         <button id="logout-button" class="btn btn-sm align-middle btn-outline-secondary" type="button">Logout</button>
       <% } else { %>
-        <button id="login-button" class="btn btn-outline-success login-button" type="button">Login</button>
+
+      
         <button id="register-button" class="btn btn-sm align-middle btn-outline-secondary reg-button" type="button">Register</button>
+        <button id="login-button" class="btn btn-sm align-middle btn-outline-secondary login-button" type="button">Login</button>
       <% } %>
 
     </div>

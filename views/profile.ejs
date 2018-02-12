@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/node_modules/css-star-rating/dist/css/star-rating.css">
 
     <!-- App CSS -->
-    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/profile.css" type="text/css" />
     <link rel="stylesheet" href="/styles/nav-bar.css" type="text/css" />
     <link rel="stylesheet" href="/styles/create-card.css" type="text/css" />
     <link rel="stylesheet" href="/styles/friends-side-bar.css" type="text/css" />
@@ -39,32 +39,33 @@
     </header>
       <% include ./partials/_friends-side-bar %>
 
+    <div class="container">
       <h2>Update your profile</h2>
-        
-        <div class="profile-container">
-
-          <form class="update-profile-form col-md-4" action="/profile" method="POST">
-            <label for="username"><b>Update your username </b></label>
-            <input class="col-md-12" type="text" placeholder="<%= username %>" name="username">
-            <button class="username-btn col-md-2" type="submit">Edit</button>
+          <!-- <div class="profile-container"> -->
+            <p>
+          <form class="update-username" action="/profile" method="POST">
+            <label for="username"><b>Update your username </b> </label>
+            <input id="username-bar" class="form-control" type="text" placeholder="<%= username %>" name="username">
+            <button class="username-btn btn-sm align-middle btn-outline-secondary" type="submit">Edit</button>
           </form>
+        </p>
 
           <p>
-            <form class="update-profile-form col-md-4" action="/profile" method="POST">
+            <form class="update-email" action="/profile" method="POST">
               <label for="email"><b>Update your e-mail </b></label>
-              <input class="col-md-12" type="email" placeholder="<%= email %>" name="email">
-              <button class="email-btn col-md-2" type="submit">Edit</button>
+              <input id="email-bar" class="form-control" type="email" placeholder="<%= email %>" name="email">
+              <button class="email-btn btn-sm align-middle btn-outline-secondary" type="submit">Edit</button>
             </form>
           </p>
 
           <p>
-            <form class="update-profile-form col-md-4" action="/profile" method="POST">
+            <form class="update-password" action="/profile" method="POST">
               <label for="password"><b>Confirm your password to update</b></label>
-              <input class="col-md-12" type="password" name="password">
-              <button class="password-btn col-md-2" type="submit">Edit</button>
+              <input id="password-bar" class="form-control" type="password" name="password">
+              <button class="password-btn btn-sm align-middle btn-outline-secondary" type="submit">Edit</button>
             </form>
           </p> 
-
-        </div>
+        <!-- </div> -->
+    </div>
   </body>
 </html>
