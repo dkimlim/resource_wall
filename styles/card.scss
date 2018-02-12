@@ -13,13 +13,20 @@
  padding: 5px 15px 5px 15px;
 }
 
-#card-username {
+#savedByUsername {
   display: block;
   text-align: center;
   margin: auto;
-  font-family: 'Helvetica', serif, ;
-  font-color: #B3B4B6;
+  font-family: 'Lora', serif, ;
+  color: #848585;
+}
 
+.card-tags {
+  display: block;
+  text-align: center;
+  margin: auto;
+  font-family: 'Lora', serif, ;
+  color: #848585;
 }
 
 .card-title {
@@ -27,9 +34,12 @@
   text-align: center;
   margin: auto;
   font-family: 'Lora', serif, ;
-  font-color: #1B284E;
+  color: #1D4E58  ;
 
 }
+
+
+
 .card-reaction {
   display: inline;
   margin: auto;
@@ -42,7 +52,7 @@
   text-align: center;
   margin: auto;
 
-  font-color: #B3B4B6;
+  color:#848585;
 
 }
 
