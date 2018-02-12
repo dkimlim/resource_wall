@@ -14,10 +14,12 @@ $("#create-new-card-submit").on('click', function (event) {
 })
 
   $("#register-button").click(function () {
+    $(".login-form").hide();
     $(".register-form").slideToggle("slow");
   });
 
   $("#login-button").click(function () {
+    $(".register-form").hide();
     $(".login-form").slideToggle("slow");
   });
 
@@ -214,3 +216,6 @@ $("#create-new-card-submit").on('click', function (event) {
       $('.commentbox').slideToggle('slow');
   })
 })
+
+
+
