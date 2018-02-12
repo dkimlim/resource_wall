@@ -4,6 +4,8 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   position: relative;
   margin: 15px auto;
+  height: 100%;
+
 }
 
 .card-body {
@@ -34,7 +36,7 @@
   text-align: center;
   margin: auto;
   font-family: 'Lora', serif, ;
-  color: #1D4E58  ;
+  color: #087E97   ;
 
 }
 
@@ -55,6 +57,9 @@
   color:#848585;
 
 }
+#label-for-rating{
+color: #B3B4B6
+}
 
 #card-description {
   display: block;
@@ -72,6 +77,13 @@
 
 }
 
+.fa-comment:hover {
+    color: #fff;
+    background-color:   #087E97  ;
+    border-color:   #087E97  ; /*set the color you want here*/
+}
+
+
 .fa-arrow-down {
  display: inline;
   margin: auto;
@@ -79,6 +91,11 @@
   color: #B3B4B6;
   border-color: white;
 
+}
+.fa-arrow-down:hover {
+    color: #fff;
+    background-color:   #087E97  ;
+    border-color:   #087E97  ; /*set the color you want here*/
 }
 
 
@@ -91,6 +108,13 @@
   border-color: white;
 
 }
+
+.fa-heart:hover  {
+      color: #fff;
+    background-color:   #087E97  ;
+    border-color:   #087E97  ; /*set the color you want here*/
+}
+
 
 .commentbox {
   display: none;

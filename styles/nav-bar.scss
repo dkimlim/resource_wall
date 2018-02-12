@@ -1,6 +1,5 @@
 .navbar {
   background: linear-gradient(to top, rgba(106, 184, 187, 0), rgba(106, 184, 187, 1));
-
   padding: 0px 15px 0px 15px;
   color: white;
   font-family: helvetica;
@@ -21,7 +20,8 @@
   width: 85px;
   height: 35px;
   margin: 1em;
-  border-radius: 24px
+  border-radius: 24px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .search-bar, .choose-board, .card-buttons, .profile-buttons {
@@ -29,19 +29,22 @@
  border: none;
   border-radius: 24px;
    height: 35px;
+
 }
 
 #reveal-new-card, #profile-button, #logout-button {
   color: white;
  border-color: white;
   padding: 7px;
-  border-radius: 24px
+  border-radius: 24px;
+   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 #login-button, #register-button {
   color: white;
   border-radius: 24px;
   padding: 10px;
+ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 #show-my-cards {
@@ -51,8 +54,9 @@ border-radius: 24px
 }
 
 .choose-board {
-  font-size: 14px;
+  font-size: 18px;
    border-color: white;
+   opacity: 0.9;
 }
 
 #board-to-view {
@@ -61,6 +65,8 @@ border-radius: 24px
   border-radius: 20px;
  border-color: white;
   font: 14px;
+ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
 }
 
 #view-board {
@@ -69,29 +75,29 @@ border-radius: 24px
   border-color: white;
   margin-right: 320px;
   margin-left: 0;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .search-form {
   width: 300px;
   height: 35px;
   border-radius: 20px;
-
-
   padding-left: 10px;
+   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+   opacity: 0.9;
 }
 
 .search-btn {
   width: 40px;
   border-radius: 100px;
-
   margin-left: 0;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .new-card {
-
   background-color: white;
   position:relative;
   margin: 15px auto;
-
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   border-radius: 0.5em;
 }

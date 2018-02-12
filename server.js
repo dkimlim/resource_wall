@@ -196,7 +196,7 @@ app.get('/user-boards', (req, res) => {
 app.post('/comments', (req, res) => {
   console.log('in comments POST', req.session);
   DataHelpers.addComment(req.body, req.session, (err) => {
-    res.redirect('/');
+    res.redirect('back');
   })
 })
 
@@ -252,7 +252,7 @@ app.get("/profile", (req, res) => {
 app.post("/profile", (req, res) => {
   const userData = {};
 
-  //username cannot have spaces. Will return an error. 
+  //username cannot have spaces. Will return an error.
   if(req.body.username.indexOf(' ') >= 0){
       res.redirect('profile')
   } else {
@@ -260,7 +260,7 @@ app.post("/profile", (req, res) => {
       if(req.body.password) userData.password = bcrypt.hashSync(req.body.password, 10);
       if(req.session.userID) userData.userid = req.session.userID;
       if(req.body.username) userData.username = req.body.username;
-  } 
+  }
   DataHelpers.updateProfileInfo(userData, (results) => {
       console.log(results);
   })
