@@ -4,7 +4,12 @@ body {
 }
 
 h2 {
-    text-align: center;
+  text-align: center;
+}
+
+#error {
+    color: red;
+    display: none;
 }
 
 .container {
@@ -14,7 +19,6 @@ h2 {
   padding: 0 25%;
 }
 
-
 .username-btn, .email-btn, .password-btn {
   display: inline-block;
   color: white;
@@ -22,20 +26,19 @@ h2 {
   width: 50px;
   height: 35px;
   border-radius: 100px;
-    border-color: white;
-    margin-left: 0;
-  
+  border-color: white;
+  margin-left: 0;
 }
 
 .update-username, .update-email, .update-password {
-    display: inline-block;
-    width: 550px;
-    /*height: 100px;*/
-    border-radius: 20px;
-    color: white;
-    background-color: #808080;
-    padding-left: 10px;
-    z-index: 100;
+  display: inline-block;
+  width: 550px;
+  /*height: 100px;*/
+  border-radius: 20px;
+  color: white;
+  background-color: #808080;
+  padding-left: 10px;
+  z-index: 100;
 }
 
 #username-bar, #email-bar, #password-bar {
